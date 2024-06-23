@@ -10,7 +10,7 @@
 
 本题推荐使用 Java 语言和 Guava 库。
 
-代码见 [loganalysis](https://github.com/Shelly111111/QFC2024/tree/master/src/main/java/com/qunar/qfc2024/loganalysis) ，相关测试于 [Qfc2024ApplicationTests](https://github.com/Shelly111111/QFC2024/blob/master/src/test/java/com/qunar/qfc2024/Qfc2024ApplicationTests.java)
+代码见 [loganalysis](https://github.com/Shelly111111/QFC2024-backend/blob/master/QFC2024-domain/src/main/java/com/qunar/qfc2024/domain/Facade/loganalysis/AccessFacade.java) ，相关测试于 [Qfc2024ApplicationTests](https://github.com/Shelly111111/QFC2024-backend/blob/master/QFC2024-application/src/test/java/com/qunar/qfc2024/web/Qfc2024ApplicationTests.java)
 
 ## 二、有效代码行数统计
 从本题对应的附件中找到 StringUtils.java 文件，将其复制到工程的 classpath 下，编程
@@ -20,7 +20,7 @@ validLineCount.txt 中。请注意，
 2) 考虑代码里有多行注释的情况；
 3) 不用考虑代码和注释混合在一行的情况。
 
-代码见 [codelines](https://github.com/Shelly111111/QFC2024/tree/master/src/main/java/com/qunar/qfc2024/codelines) ，相关测试于 [Qfc2024ApplicationTests](https://github.com/Shelly111111/QFC2024/blob/master/src/test/java/com/qunar/qfc2024/Qfc2024ApplicationTests.java)
+代码见 [codelines](https://github.com/Shelly111111/QFC2024-backend/blob/master/QFC2024-infrastructure/src/main/java/com/qunar/qfc2024/infrastructure/codelines/CodeLineFacadeImpl.java) ，相关测试于 [Qfc2024ApplicationTests](https://github.com/Shelly111111/QFC2024-backend/blob/master/QFC2024-application/src/test/java/com/qunar/qfc2024/web/Qfc2024ApplicationTests.java)
 
 ## 三、文本解密
 从本题对应的附件中找到 sdxl_prop.txt 和 sdxl_template.txt。根据 sdxl_prop.txt 中内
@@ -32,7 +32,7 @@ validLineCount.txt 中。请注意，
 3) charOrder 文本排序，java 的字符排序
 4) charOrderDESC 文本倒序，java 的字符倒序
 
-代码见 [textdecryption](https://github.com/Shelly111111/QFC2024/tree/master/src/main/java/com/qunar/qfc2024/textdecryption) ，相关测试于 [Qfc2024ApplicationTests](https://github.com/Shelly111111/QFC2024/blob/master/src/test/java/com/qunar/qfc2024/Qfc2024ApplicationTests.java)
+代码见 [textdecryption](https://github.com/Shelly111111/QFC2024-backend/blob/master/QFC2024-domain/src/main/java/com/qunar/qfc2024/domain/Facade/textdecryption/TextDecryptFacade.java) ，相关测试于 [Qfc2024ApplicationTests](https://github.com/Shelly111111/QFC2024-backend/blob/master/QFC2024-application/src/test/java/com/qunar/qfc2024/web/Qfc2024ApplicationTests.java)
 
 ## 四、Java 模拟 Linux 命令处理和管道
 请使用 Java 语言实现一个基本的 shell 模拟器。
@@ -54,11 +54,11 @@ grep exception | wc -l**，可以用来统计一个文件中 **exception** 出�
 
 请注意程序对于未来加入其他命令的可扩展性和对于大规模输入的内存开销。
 
-代码见 [shellsimulation](https://github.com/Shelly111111/QFC2024/tree/master/src/main/java/com/qunar/qfc2024/shellsimulation) ，相关测试于 [Qfc2024ApplicationTests](https://github.com/Shelly111111/QFC2024/blob/master/src/test/java/com/qunar/qfc2024/Qfc2024ApplicationTests.java)
+代码见 [shellsimulation](https://github.com/Shelly111111/QFC2024-backend/blob/master/QFC2024-domain/src/main/java/com/qunar/qfc2024/domain/Facade/shellsimulation/ShellFacade.java) ，相关测试于 [Qfc2024ApplicationTests](https://github.com/Shelly111111/QFC2024-backend/blob/master/QFC2024-application/src/test/java/com/qunar/qfc2024/web/Qfc2024ApplicationTests.java)
 
 ## 五、Java 网络编程
 使用 java socket 编程实现一 server 和 client，client 通过命令行读取用户输入的网址，将
 其传输给 server 端，server 通过 http 获取数据，统计总字符数(包括标点符号)、汉字数、
 英文字符数、标点符号数，返回给 client，并输出。使用 nio 加分。
 
-代码见 [socketcomm](https://github.com/Shelly111111/QFC2024/tree/master/src/main/java/com/qunar/qfc2024/socketcomm) ，服务器端请执行 [server.WebServer](https://github.com/Shelly111111/QFC2024/blob/master/src/main/java/com/qunar/qfc2024/socketcomm/server/WebServer.java) ，客户端请执行 [client.WebClient](https://github.com/Shelly111111/QFC2024/blob/master/src/main/java/com/qunar/qfc2024/socketcomm/client/WebClient.java)
+代码见 [socketcomm](https://github.com/Shelly111111/QFC2024-backend/blob/master/QFC2024-application/src/main/java/com/qunar/qfc2024/web/socketcomm/) ，服务器端请执行 [server.WebServer](https://github.com/Shelly111111/QFC2024-backend/blob/master/QFC2024-application/src/main/java/com/qunar/qfc2024/web/socketcomm/server/WebServer.java) ，客户端请执行 [client.WebClient](https://github.com/Shelly111111/QFC2024-backend/blob/master/QFC2024-application/src/main/java/com/qunar/qfc2024/web/socketcomm/client/WebClient.java)
