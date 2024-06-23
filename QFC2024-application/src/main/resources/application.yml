@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: QFC2024
+
+server:
+  port: 8080
+
+attachments:
+  basePath: attachments
+  questions:
+    one:
+      folder: Question 1
+      file: access.log
+    two:
+      folder: Question 2
+      file: StringUtils.java
+      output: validLineCount.txt
+    three:
+      folder: Question 3
+      prop: sdxl_prop.txt
+      template: sdxl_template.txt
+      output: sdxl.txt
