@@ -8,7 +8,7 @@ import com.qunar.qfc2024.domain.Facade.loganalysis.AccessFacade;
 import com.qunar.qfc2024.domain.bo.GroupedURL;
 import com.qunar.qfc2024.domain.bo.InterfaceInfo;
 import com.qunar.qfc2024.domain.bo.InterfaceStat;
-import com.qunar.qfc2024.domain.enumeration.QueryMethod;
+import com.qunar.qfc2024.common.enumeration.QueryMethod;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;

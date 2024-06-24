@@ -1,4 +1,4 @@
-package com.qunar.qfc2024.domain.enumeration;
+package com.qunar.qfc2024.common.enumeration;
 
 import lombok.extern.slf4j.Slf4j;
 

@@ -1,4 +1,4 @@
-package com.qunar.qfc2024.domain.bo;
+package com.qunar.qfc2024.api.dto;
 
 import com.qunar.qfc2024.common.enumeration.QueryMethod;
 import io.swagger.annotations.ApiModelProperty;
@@ -11,7 +11,6 @@ import javax.validation.constraints.Min;
 
 /**
  * 请求接口统计
- *
  * @author zhangge
  * @date 2024/6/10
  */

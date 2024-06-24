@@ -1,7 +1,7 @@
 package com.qunar.qfc2024.domain.bo;
 
 import com.google.common.base.Splitter;
-import com.qunar.qfc2024.domain.enumeration.QueryMethod;
+import com.qunar.qfc2024.common.enumeration.QueryMethod;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
