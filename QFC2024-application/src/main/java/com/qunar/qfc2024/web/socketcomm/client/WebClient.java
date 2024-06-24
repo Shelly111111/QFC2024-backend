@@ -1,4 +1,4 @@
-package com.qunar.qfc2024.web.controller.socketcomm.client;
+package com.qunar.qfc2024.web.socketcomm.client;
 
 import com.qunar.qfc2024.common.utils.CharacterUtil;
 import io.netty.bootstrap.Bootstrap;
