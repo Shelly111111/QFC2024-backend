@@ -12,6 +12,8 @@ import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.Comparator;
@@ -148,7 +150,14 @@ public class TextDecryptFacadeImpl implements TextDecryptFacade {
 
         try {
             //获取输出文件
-            File file = new File(Paths.get(rootPath, "out", output).toString());
+            Path outPath = Paths.get(rootPath, "out");
+            File folder = outPath.toFile();
+            //如果文件夹不存在，则创建
+            if(!folder.exists() || !folder.isDirectory()){
+                Files.createDirectory(outPath);
+            }
+            File file = outPath.resolve(output).toFile();
+            //如果文件不存在，则创建
             if (!file.exists()) {
                 file.createNewFile();
             }

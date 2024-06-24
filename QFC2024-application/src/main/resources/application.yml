@@ -1,6 +1,15 @@
 spring:
   application:
     name: QFC2024
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 50MB
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/shake?characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: root
 
 server:
   port: 8080
@@ -11,6 +20,7 @@ attachments:
     one:
       folder: Question 1
       file: access.log
+      save: question1
     two:
       folder: Question 2
       file: StringUtils.java

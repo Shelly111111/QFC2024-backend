@@ -15,9 +15,14 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
@@ -41,6 +46,9 @@ public class AccessFacadeImpl implements AccessFacade {
 
     @Value("${attachments.questions.one.file}")
     private String file;
+
+    @Value("${attachments.questions.one.save}")
+    private String savePath;
 
     private final Object lock = new Object();
 
@@ -165,5 +173,52 @@ public class AccessFacadeImpl implements AccessFacade {
                                 .collect(Collectors.toList())))
                 .collect(Collectors.toList());
         return list;
+    }
+
+    /**
+     * 保存文件到本地
+     *
+     * @param file 文件
+     * @return 是否成功
+     * @author zhangge
+     * @date 2024/6/24
+     */
+    @Override
+    public boolean saveFile(MultipartFile file) {
+
+        String rootPath = System.getProperty("user.dir");
+        String filename = file.getOriginalFilename();
+
+        try {
+            //获取输出文件
+            Path outPath = Paths.get(rootPath, "data");
+            File saveFolder = outPath.toFile();
+            //如果文件夹不存在，则创建
+            if(!saveFolder.exists() || !saveFolder.isDirectory()){
+                Files.createDirectory(outPath);
+            }
+            outPath = outPath.resolve(savePath);
+            saveFolder = outPath.toFile();
+            //如果文件夹不存在，则创建
+            if(!saveFolder.exists() || !saveFolder.isDirectory()){
+                Files.createDirectory(outPath);
+            }
+
+            File saveFile = outPath.resolve(filename).toFile();
+            //如果文件不存在，则创建
+            if (!saveFile.exists()) {
+                saveFile.createNewFile();
+            }
+            FileOutputStream outputStream = new FileOutputStream(saveFile);
+            outputStream.write(file.getBytes());
+            //关闭文件流
+            outputStream.flush();
+            outputStream.close();
+
+        } catch (IOException e) {
+            log.error(e.getMessage());
+            return false;
+        }
+        return true;
     }
 }
