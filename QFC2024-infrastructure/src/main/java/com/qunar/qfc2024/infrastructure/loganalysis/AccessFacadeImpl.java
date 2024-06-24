@@ -5,9 +5,9 @@ import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 import com.qunar.qfc2024.domain.Facade.loganalysis.AccessFacade;
-import com.qunar.qfc2024.domain.dto.GroupedURL;
-import com.qunar.qfc2024.domain.dto.InterfaceInfo;
-import com.qunar.qfc2024.domain.dto.InterfaceStat;
+import com.qunar.qfc2024.domain.bo.GroupedURL;
+import com.qunar.qfc2024.domain.bo.InterfaceInfo;
+import com.qunar.qfc2024.domain.bo.InterfaceStat;
 import com.qunar.qfc2024.domain.enumeration.QueryMethod;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -17,10 +17,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -63,22 +60,36 @@ public class AccessFacadeImpl implements AccessFacade {
                 }
             });
 
+    private final String currentFile = "";
+
     /**
      * 读取接口文件
      *
+     * @param filename 文件名
      * @author zhangge
      * @date 2024/6/11
      */
-    private void readInterfaceFile() {
-        synchronized (lock){
+    private boolean readInterfaceFile(String filename) {
+        synchronized (lock) {
             Map<String, InterfaceInfo> map = new HashMap<>(cache.asMap());
-            if(map.isEmpty()){
+            if (map.isEmpty() || (!StringUtils.isBlank(filename) && !currentFile.equals(filename)) || (StringUtils.isBlank(filename) && !currentFile.equals(file))) {
                 cache.cleanUp();
-                //读取测试文件
-                Resource resource = new ClassPathResource(Paths.get(basePath, folder, file).toString());
                 try {
-                    //获取流
-                    InputStream inputStream = resource.getInputStream();
+                    InputStream inputStream;
+                    //未指定文件名
+                    if (StringUtils.isBlank(filename)) {
+                        String filePath = Paths.get(basePath, folder, file).toString();
+                        //读取测试文件
+                        Resource resource = new ClassPathResource(filePath);
+                        //获取流
+                        inputStream = resource.getInputStream();
+                    } else {
+                        //指定了文件名
+                        String rootPath = System.getProperty("user.dir");
+                        File file = Paths.get(rootPath, "data", savePath, filename).toFile();
+                        inputStream = new FileInputStream(file);
+                    }
+
                     //扫描每行
                     Scanner scanner = new Scanner(inputStream);
                     while (scanner.hasNextLine()) {
@@ -88,7 +99,7 @@ public class AccessFacadeImpl implements AccessFacade {
                         }
                         //转化为接口信息类并存储到Cache中
                         InterfaceInfo interfaceInfo = new InterfaceInfo(line);
-                        cache.put(interfaceInfo.getUuid(),interfaceInfo);
+                        cache.put(interfaceInfo.getUuid(), interfaceInfo);
                     }
 
                     //关闭Scanner
@@ -97,20 +108,26 @@ public class AccessFacadeImpl implements AccessFacade {
                     inputStream.close();
                 } catch (IOException e) {
                     log.error(e.getMessage());
+                    return false;
                 }
             }
         }
+        return true;
     }
 
     @Override
-    public Integer getQueryCount() {
-        readInterfaceFile();
-        return new HashMap<>(cache.asMap()).size();
+    public Integer getQueryCount(String filename) {
+        if (readInterfaceFile(filename)) {
+            return new HashMap<>(cache.asMap()).size();
+        }
+        return null;
     }
 
     @Override
-    public List<InterfaceStat> getFrequentInterface(Long limitCount) {
-        readInterfaceFile();
+    public List<InterfaceStat> getFrequentInterface(String filename, Long limitCount) {
+        if (!readInterfaceFile(filename)) {
+            return null;
+        }
         //统计各个接口的请求数量
         Map<String, Long> map = new HashMap<>(cache.asMap()).values().stream()
                 .collect(Collectors.groupingBy(InterfaceInfo::getUrl, Collectors.counting()));
@@ -131,7 +148,7 @@ public class AccessFacadeImpl implements AccessFacade {
 
     @Override
     public List<InterfaceStat> getQueryMethodCount() {
-        readInterfaceFile();
+        readInterfaceFile(null);
         //统计GET和POST的请求数量
         Map<QueryMethod, Long> map = new HashMap<>(cache.asMap()).values().stream()
                 //过滤除GET和POST请求外的请求
@@ -150,12 +167,12 @@ public class AccessFacadeImpl implements AccessFacade {
 
     @Override
     public List<GroupedURL> getGroupedURL() {
-        readInterfaceFile();
+        readInterfaceFile(null);
         Map<String, List<InterfaceInfo>> map = new HashMap<>(cache.asMap())
                 .values()
                 .stream()
                 //保证url是按照/AAA/BBB而不是其他开头
-                .filter(a->a.getUrl().matches("/[^/]+/[^/]+"))
+                .filter(a -> a.getUrl().matches("/[^/]+/[^/]+"))
                 .collect(Collectors.groupingBy(
                         //根据/AAA进行分组
                         a -> Splitter.on('/')
@@ -194,13 +211,13 @@ public class AccessFacadeImpl implements AccessFacade {
             Path outPath = Paths.get(rootPath, "data");
             File saveFolder = outPath.toFile();
             //如果文件夹不存在，则创建
-            if(!saveFolder.exists() || !saveFolder.isDirectory()){
+            if (!saveFolder.exists() || !saveFolder.isDirectory()) {
                 Files.createDirectory(outPath);
             }
             outPath = outPath.resolve(savePath);
             saveFolder = outPath.toFile();
             //如果文件夹不存在，则创建
-            if(!saveFolder.exists() || !saveFolder.isDirectory()){
+            if (!saveFolder.exists() || !saveFolder.isDirectory()) {
                 Files.createDirectory(outPath);
             }
 

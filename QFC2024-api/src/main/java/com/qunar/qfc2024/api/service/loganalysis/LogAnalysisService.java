@@ -14,11 +14,12 @@ public interface LogAnalysisService {
     /**
      * 获取请求总量
      *
+     * @param filename 文件名
      * @return 请求总量
      * @author zhangge
      * @date 2024/6/23
      */
-    Result<Integer> getQueryCount();;
+    Result<Integer> getQueryCount(String filename);
 
     /**
      * 保存文件

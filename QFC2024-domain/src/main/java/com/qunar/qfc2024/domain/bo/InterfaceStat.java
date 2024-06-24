@@ -1,4 +1,4 @@
-package com.qunar.qfc2024.domain.dto;
+package com.qunar.qfc2024.domain.bo;
 
 import com.qunar.qfc2024.domain.enumeration.QueryMethod;
 import io.swagger.annotations.ApiModelProperty;

@@ -1,4 +1,4 @@
-package com.qunar.qfc2024.domain.dto;
+package com.qunar.qfc2024.domain.bo;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;

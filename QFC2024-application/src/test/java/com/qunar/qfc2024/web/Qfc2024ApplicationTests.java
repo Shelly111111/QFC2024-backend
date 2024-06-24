@@ -4,9 +4,9 @@ import com.qunar.qfc2024.domain.Facade.codelines.CodeLineFacade;
 import com.qunar.qfc2024.domain.Facade.loganalysis.AccessFacade;
 import com.qunar.qfc2024.domain.Facade.shellsimulation.ShellFacade;
 import com.qunar.qfc2024.domain.Facade.textdecryption.TextDecryptFacade;
-import com.qunar.qfc2024.domain.dto.GroupedURL;
-import com.qunar.qfc2024.domain.dto.InterfaceInfo;
-import com.qunar.qfc2024.domain.dto.InterfaceStat;
+import com.qunar.qfc2024.domain.bo.GroupedURL;
+import com.qunar.qfc2024.domain.bo.InterfaceInfo;
+import com.qunar.qfc2024.domain.bo.InterfaceStat;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -42,14 +42,14 @@ class Qfc2024ApplicationTests {
 
     @Test
     void getQueryCountTest() {
-        Integer count = accessFacade.getQueryCount();
+        Integer count = accessFacade.getQueryCount(null);
         System.out.println(count);
         //132585
     }
 
     @Test
     void getFrequentInterfaceTest() {
-        List<InterfaceStat> frequentInterface = accessFacade.getFrequentInterface(10L);
+        List<InterfaceStat> frequentInterface = accessFacade.getFrequentInterface(null,10L);
         System.out.println(frequentInterface);
         //[InterfaceStat(method=null, url=/duty/getToDoDutyCount.json, queryCount=23396), InterfaceStat(method=null, url=/twell/public.htm, queryCount=16192), InterfaceStat(method=null, url=/notification/queryMessageByUid.htm, queryCount=16052), InterfaceStat(method=null, url=/twell/querytwellDetailForMobile.htm, queryCount=9584), InterfaceStat(method=null, url=/geo/coord2city.json, queryCount=6085), InterfaceStat(method=null, url=/twell/private.htm, queryCount=5826), InterfaceStat(method=null, url=/user/getResources.json, queryCount=5585), InterfaceStat(method=null, url=/user/getUserInfo.json, queryCount=5300), InterfaceStat(method=null, url=/location/getOneAuthCity.htm, queryCount=5207), InterfaceStat(method=null, url=/user/postDeviceInfo.htm, queryCount=4878)]
         System.out.println(frequentInterface.size());

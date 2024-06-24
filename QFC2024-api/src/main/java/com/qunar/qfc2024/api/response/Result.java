@@ -23,12 +23,15 @@ public class Result<T> {
 
     private String message;
 
+    public static final Integer SUCCESS_CODE = 200;
+
+    public static final Integer ERROR_CODE = 404;
+
     public static Result error(String message) {
-        return new Result(500, null, message);
+        return new Result(ERROR_CODE, null, message);
     }
 
     public static Result success(String message) {
-        return new Result(200, null, message);
+        return new Result(SUCCESS_CODE, null, message);
     }
-
 }

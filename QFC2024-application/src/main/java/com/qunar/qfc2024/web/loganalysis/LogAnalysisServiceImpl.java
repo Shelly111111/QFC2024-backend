@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.Objects;
+
 /**
  * 日志分析服务
  *
@@ -21,9 +23,17 @@ public class LogAnalysisServiceImpl implements LogAnalysisService {
     @Autowired
     private AccessFacade accessFacade;
 
+
+
     @Override
-    public Result<Integer> getQueryCount() {
-        return null;
+    public Result<Integer> getQueryCount(String filename) {
+        Integer queryCount = accessFacade.getQueryCount(filename);
+
+        if (Objects.isNull(queryCount)) {
+            return Result.error("获取请求总量失败！");
+        }
+
+        return new Result<>(Result.SUCCESS_CODE, queryCount, null);
     }
 
     @Override

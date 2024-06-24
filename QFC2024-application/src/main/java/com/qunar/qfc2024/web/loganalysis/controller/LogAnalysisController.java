@@ -1,5 +1,6 @@
 package com.qunar.qfc2024.web.loganalysis.controller;
 
+import com.qunar.qfc2024.api.response.LogAnalysis;
 import com.qunar.qfc2024.api.response.Result;
 import com.qunar.qfc2024.api.service.loganalysis.LogAnalysisService;
 import lombok.extern.slf4j.Slf4j;
@@ -36,5 +37,29 @@ public class LogAnalysisController {
     @PostMapping("/upload")
     public Result getFile(@RequestParam("file") MultipartFile file) {
         return logAnalysisService.saveFile(file);
+    }
+
+    /**
+     * 日志分析
+     *
+     * @param filename 日志文件名
+     * @return 处理结果
+     * @author zhangge
+     * @date 2024/6/24
+     */
+    @PostMapping("/analysis")
+    public Result<LogAnalysis> logAnalysis(@RequestParam("file") String filename) {
+        LogAnalysis analysis = new LogAnalysis();
+
+        //获取请求总量
+        Result<Integer> queryCount = logAnalysisService.getQueryCount(filename);
+        if (Result.SUCCESS_CODE.equals(queryCount.getCode())) {
+            analysis.setQueryCount(queryCount.getData());
+        } else {
+            return Result.error(queryCount.getMessage());
+        }
+        //获取GET、POST请求量
+
+        return new Result<>(Result.SUCCESS_CODE, analysis, null);
     }
 }

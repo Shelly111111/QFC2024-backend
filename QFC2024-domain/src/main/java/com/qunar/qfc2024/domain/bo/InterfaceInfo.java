@@ -1,4 +1,4 @@
-package com.qunar.qfc2024.domain.dto;
+package com.qunar.qfc2024.domain.bo;
 
 import com.google.common.base.Splitter;
 import com.qunar.qfc2024.domain.enumeration.QueryMethod;

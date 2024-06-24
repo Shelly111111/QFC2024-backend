@@ -3,7 +3,7 @@ package com.qunar.qfc2024.infrastructure.textdecryption;
 import com.google.common.base.Splitter;
 import com.google.common.collect.Lists;
 import com.qunar.qfc2024.domain.Facade.textdecryption.TextDecryptFacade;
-import com.qunar.qfc2024.domain.dto.Prop;
+import com.qunar.qfc2024.domain.bo.Prop;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
