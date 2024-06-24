@@ -9,6 +9,7 @@ import com.qunar.qfc2024.domain.bo.GroupedURL;
 import com.qunar.qfc2024.domain.bo.InterfaceInfo;
 import com.qunar.qfc2024.domain.bo.InterfaceStat;
 import com.qunar.qfc2024.common.enumeration.QueryMethod;
+import com.qunar.qfc2024.domain.bo.MethodStat;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
@@ -60,7 +61,7 @@ public class AccessFacadeImpl implements AccessFacade {
                 }
             });
 
-    private final String currentFile = "";
+    private String currentFile = "";
 
     /**
      * 读取接口文件
@@ -73,6 +74,12 @@ public class AccessFacadeImpl implements AccessFacade {
         synchronized (lock) {
             Map<String, InterfaceInfo> map = new HashMap<>(cache.asMap());
             if (map.isEmpty() || (!StringUtils.isBlank(filename) && !currentFile.equals(filename)) || (StringUtils.isBlank(filename) && !currentFile.equals(file))) {
+                if (!StringUtils.isBlank(filename) && !currentFile.equals(filename)) {
+                    currentFile = filename;
+                } else if (StringUtils.isBlank(filename) && !currentFile.equals(file)) {
+                    currentFile = file;
+                }
+                cache.invalidateAll();
                 cache.cleanUp();
                 try {
                     InputStream inputStream;
@@ -147,27 +154,31 @@ public class AccessFacadeImpl implements AccessFacade {
     }
 
     @Override
-    public List<InterfaceStat> getQueryMethodCount() {
-        readInterfaceFile(null);
+    public List<MethodStat> getQueryMethodCount(String filename) {
+        if (!readInterfaceFile(filename)) {
+            return null;
+        }
         //统计GET和POST的请求数量
         Map<QueryMethod, Long> map = new HashMap<>(cache.asMap()).values().stream()
                 //过滤除GET和POST请求外的请求
                 .filter(a -> (a.getMethod() == QueryMethod.GET || a.getMethod() == QueryMethod.POST))
                 .collect(Collectors.groupingBy(InterfaceInfo::getMethod, Collectors.counting()));
         //格式转化
-        List<InterfaceStat> list = map.entrySet().stream()
+        List<MethodStat> list = map.entrySet().stream()
                 .map(a -> {
-                    InterfaceStat interfaceStat = new InterfaceStat();
-                    interfaceStat.setMethod(a.getKey());
-                    interfaceStat.setQueryCount(a.getValue());
-                    return interfaceStat;
+                    MethodStat methodStat = new MethodStat();
+                    methodStat.setMethod(a.getKey());
+                    methodStat.setQueryCount(a.getValue());
+                    return methodStat;
                 }).collect(Collectors.toList());
         return list;
     }
 
     @Override
-    public List<GroupedURL> getGroupedURL() {
-        readInterfaceFile(null);
+    public List<GroupedURL> getGroupedURL(String filename) {
+        if (!readInterfaceFile(filename)) {
+            return null;
+        }
         Map<String, List<InterfaceInfo>> map = new HashMap<>(cache.asMap())
                 .values()
                 .stream()

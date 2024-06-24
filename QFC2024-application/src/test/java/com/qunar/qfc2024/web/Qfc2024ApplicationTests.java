@@ -7,6 +7,7 @@ import com.qunar.qfc2024.domain.Facade.textdecryption.TextDecryptFacade;
 import com.qunar.qfc2024.domain.bo.GroupedURL;
 import com.qunar.qfc2024.domain.bo.InterfaceInfo;
 import com.qunar.qfc2024.domain.bo.InterfaceStat;
+import com.qunar.qfc2024.domain.bo.MethodStat;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -57,14 +58,14 @@ class Qfc2024ApplicationTests {
 
     @Test
     void getQueryMethodCountTest() {
-        List<InterfaceStat> list = accessFacade.getQueryMethodCount();
+        List<MethodStat> list = accessFacade.getQueryMethodCount(null);
         System.out.println(list);
         //[InterfaceStat(method=POST, url=null, queryCount=16008), InterfaceStat(method=GET, url=null, queryCount=116575)]
     }
 
     @Test
     void getGroupedURLTest() {
-        List<GroupedURL> groupedURL = accessFacade.getGroupedURL();
+        List<GroupedURL> groupedURL = accessFacade.getGroupedURL(null);
         System.out.println(groupedURL);
         //[GroupedURL(category=/visitrecord, urls=[/visitrecord/addVisitRecordNew.htm, /visitrecord/queryVisitRecordForPage.htm, /visitrecord/suggestAccompanyVisitUsers.json, /visitrecord/updateVisitRecordNew.htm]), GroupedURL(category=/org, urls=[/org/queryOrgWithUser.json]), GroupedURL(category=/transferhistory, urls=[/transferhistory/queryTransHis.htm]), GroupedURL(category=/accompanyvisitrecord, urls=[/accompanyvisitrecord/saveAccompanyVisitRecord.json]), GroupedURL(category=/monitor, urls=[/monitor/qmonitor.jsp]), GroupedURL(category=/visitmanage, urls=[/visitmanage/listVisitInfo.htm]), GroupedURL(category=/geo, urls=[/geo/coord2city.json]), GroupedURL(category=/notification, urls=[/notification/queryMessageByUid.htm, /notification/markRead.htm, /notification/queryMessageByUid.json, /notification/queryDetail.htm]), GroupedURL(category=/contact, urls=[/contact/listContactPage.htm, /contact/mylist.htm, /contact/addNew.htm, /contact/updateNew.htm]), GroupedURL(category=/twell, urls=[/twell/querytwellDetailForMobile.htm, /twell/public.htm, /twell/private.htm, /twell/sortingIntwell.htm, /twell/giveUptwells.htm, /twell/allotUserTotwell.json, /twell/queryRoomTypeRoomAmount.json, /twell/addNewtwell1.htm, /twell/editRoomTypeRoomAmount.json, /twell/modifytwellInfo1.htm, /twell/allotUserSuggest.json, /twell/reporttwellInfoError.htm]), GroupedURL(category=/duty, urls=[/duty/getToDoDutyCount.json, /duty/getDutyListNew.json, /duty/detail.json, /duty/processDuty.json, /duty/getDutyListPage.json, /duty/getCategoryTreeFilterEmptyNew.json]), GroupedURL(category=/accompanyvisitmanage, urls=[/accompanyvisitmanage/listAccompanyVisitInfo.json]), GroupedURL(category=/teamchangeprice, urls=[/teamchangeprice/listQueryForMobile.json, /teamchangeprice/editPriceDetailForMobile.json, /teamchangeprice/editPrice.json]), GroupedURL(category=/location, urls=[/location/getOneAuthCity.htm, /location/queryCitiesByParentId.htm]), GroupedURL(category=/tag, urls=[/tag/getSearchTagList.json]), GroupedURL(category=/twelldetail, urls=[/twelldetail/cooperation.htm]), GroupedURL(category=/user, urls=[/user/getResources.json, /user/getUserInfo.json, /user/postDeviceInfo.htm, /user/login.htm, /user/sendVerifyCode.htm, /user/logout.htm]), GroupedURL(category=/_, urls=[/_/jarinfo])]
     }

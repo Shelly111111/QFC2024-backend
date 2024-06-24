@@ -20,8 +20,8 @@ public class GroupedURLDTO {
 
     @ApiModelProperty("类别")
     @NotNull(message = "类别不能为空")
-    private String category;
+    private String label;
 
     @ApiModelProperty("url列表")
-    private List<String> urls;
+    private String children;
 }

@@ -7,9 +7,11 @@ import org.springframework.validation.annotation.Validated;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * URI分组
+ *
  * @author zhangge
  * @date 2024/6/10
  */

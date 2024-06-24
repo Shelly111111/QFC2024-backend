@@ -9,20 +9,21 @@ import org.springframework.validation.annotation.Validated;
 
 import javax.validation.constraints.Min;
 
+
 /**
- * 请求接口统计
+ * 请求方式统计
  *
  * @author zhangge
- * @date 2024/6/10
+ * @date 2024/6/24
  */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Validated
-public class InterfaceStat {
+public class MethodStat {
 
-    @ApiModelProperty("请求地址")
-    private String url;
+    @ApiModelProperty("请求方式")
+    private QueryMethod method;
 
     @ApiModelProperty("请求数量")
     @Min(value = 0, message = "请求数量应大于等于0")
