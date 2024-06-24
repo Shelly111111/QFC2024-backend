@@ -1,4 +1,4 @@
-package com.qunar.qfc2024.web.loganalysis;
+package com.qunar.qfc2024.web.service;
 
 import com.qunar.qfc2024.api.response.Result;
 import com.qunar.qfc2024.api.service.loganalysis.LogAnalysisService;

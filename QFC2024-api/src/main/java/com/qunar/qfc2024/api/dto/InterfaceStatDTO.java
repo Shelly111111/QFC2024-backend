@@ -18,7 +18,7 @@ import javax.validation.constraints.Min;
 @AllArgsConstructor
 @NoArgsConstructor
 @Validated
-public class InterfaceStat {
+public class InterfaceStatDTO {
 
     @ApiModelProperty("请求方式")
     private QueryMethod method;

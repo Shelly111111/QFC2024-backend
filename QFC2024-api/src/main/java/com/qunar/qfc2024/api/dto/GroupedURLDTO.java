@@ -16,7 +16,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @Validated
-public class GroupedURL {
+public class GroupedURLDTO {
 
     @ApiModelProperty("类别")
     @NotNull(message = "类别不能为空")
