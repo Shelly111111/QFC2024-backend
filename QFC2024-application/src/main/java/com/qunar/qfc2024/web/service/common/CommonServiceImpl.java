@@ -26,11 +26,6 @@ public class CommonServiceImpl implements CommonService {
         if (file.isEmpty()) {
             return Result.error("文件上传失败，请重新上传！");
         }
-        String filename = file.getOriginalFilename();
-        //检测文件类型
-        if (!(filename.endsWith(".txt") || filename.endsWith(".text") || filename.endsWith(".log"))) {
-            return Result.error("只能上传文本文件或log日志文件！");
-        }
         //存储文件到本地
         if (!commonFacade.saveFile(file)) {
             return Result.error("文件上传失败，请重新上传！");
