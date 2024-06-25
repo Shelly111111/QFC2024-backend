@@ -1,4 +1,4 @@
-package com.shanke.oauth2.res;
+package com.qunar.qfc2024.oauth2.res;
 
 import lombok.Data;
 

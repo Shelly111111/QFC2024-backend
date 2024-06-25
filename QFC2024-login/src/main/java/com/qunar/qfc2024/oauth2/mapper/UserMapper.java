@@ -1,7 +1,7 @@
-package com.shanke.oauth2.mapper;
+package com.qunar.qfc2024.oauth2.mapper;
 
-import com.shanke.oauth2.po.UserPO;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.qunar.qfc2024.oauth2.po.UserPO;
 
 /**
  * <p>

@@ -1,9 +1,9 @@
-package com.shanke.oauth2.service.impl;
+package com.qunar.qfc2024.oauth2.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.shanke.oauth2.mapper.UserMapper;
-import com.shanke.oauth2.po.UserPO;
-import com.shanke.oauth2.service.UserService;
+import com.qunar.qfc2024.oauth2.mapper.UserMapper;
+import com.qunar.qfc2024.oauth2.po.UserPO;
+import com.qunar.qfc2024.oauth2.service.UserService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +21,7 @@ public class UserServiceImpl implements UserService {
     /**
      * 插入信息到数据库中
      *
-     * @param user com.hello.weekly.pojo.User
+     * @param user 用户
      * @return
      */
     @Override
@@ -33,10 +33,10 @@ public class UserServiceImpl implements UserService {
      * 通过用户名进行相关用户的查询
      *
      * @param username String
-     * @return com.hello.weekly.pojo.User
+     * @return 用户信息
      *
-     * @author: Zhang
-     * @updatedate: 2023/4/18
+     * @author zhangge
+     * @date 2023/4/18
      */
     @Override
     public UserPO findByUsername(String username) {
@@ -49,8 +49,8 @@ public class UserServiceImpl implements UserService {
      * 返回所有用户
      * @return 用户列表
      *
-     * @author: Zhang
-     * @date: 2023/4/18
+     * @author zhangge
+     * @date 2023/4/18
      */
     @Override
     public List<UserPO> findAll() {

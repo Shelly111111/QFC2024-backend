@@ -1,4 +1,4 @@
-package com.shanke.oauth2.config;
+package com.qunar.qfc2024.oauth2.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -19,7 +19,7 @@ import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 
 /**
- * @author 漫舞枪神
+ * @author zhangge
  * @date 2024/3/18
  */
 @Configuration
@@ -44,7 +44,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
      *
      * @param clients org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer
      * @throws Exception
-     * @author 漫舞枪神
+     * @author zhangge
      * @date 2024/3/18
      */
     @Override
@@ -71,7 +71,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
      * 令牌管理服务
      *
      * @return org.springframework.security.oauth2.provider.token.AuthorizationServerTokenServices
-     * @author 漫舞枪神
+     * @author zhangge
      * @date 2024/3/18
      */
     @Bean
@@ -93,7 +93,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     /**
      * 配置令牌访问端点和令牌服务
      *
-     * @author 漫舞枪神
+     * @author zhangge
      * @date 2024/3/18
      */
     @Override
@@ -113,7 +113,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
      * 配置令牌端点申请令牌的安全约束
      *
      * @param oauthServer org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer
-     * @author 漫舞枪神
+     * @author zhangge
      * @date 2024/3/18
      */
     @Override
@@ -129,7 +129,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
      * 设置授权码模式的授权码如何存取
      *
      * @return org.springframework.security.oauth2.provider.code.AuthorizationCodeServices
-     * @author 漫舞枪神
+     * @author zhangge
      * @date 2024/3/18
      */
     @Bean

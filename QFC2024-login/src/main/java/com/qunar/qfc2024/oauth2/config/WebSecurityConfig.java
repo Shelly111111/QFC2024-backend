@@ -1,4 +1,4 @@
-package com.shanke.oauth2.config;
+package com.qunar.qfc2024.oauth2.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;

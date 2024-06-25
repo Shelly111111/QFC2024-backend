@@ -1,4 +1,4 @@
-package com.shanke.oauth2.config;
+package com.qunar.qfc2024.oauth2.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -8,7 +8,7 @@ import org.springframework.security.oauth2.provider.token.store.InMemoryTokenSto
 /**
  * 令牌存储策略
  *
- * @author 漫舞枪神
+ * @author zhangge
  * @date 2024/3/18
  */
 @Configuration

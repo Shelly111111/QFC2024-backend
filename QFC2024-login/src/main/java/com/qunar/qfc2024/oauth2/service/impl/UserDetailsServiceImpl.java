@@ -1,6 +1,6 @@
-package com.shanke.oauth2.service.impl;
+package com.qunar.qfc2024.oauth2.service.impl;
 
-import com.shanke.oauth2.po.UserPO;
+import com.qunar.qfc2024.oauth2.po.UserPO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -23,8 +23,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
      * @return org.springframework.security.core.userdetails.UserDetails
      * @throws UsernameNotFoundException
      *
-     * @author: 漫舞枪神
-     * @date: 2023/4/18
+     * @author zhangge
+     * @date 2023/4/18
      */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

@@ -1,4 +1,4 @@
-package com.shanke.oauth2.po;
+package com.qunar.qfc2024.oauth2.po;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;

@@ -1,7 +1,7 @@
-package com.shanke.oauth2.service;
+package com.qunar.qfc2024.oauth2.service;
 
 
-import com.shanke.oauth2.po.UserPO;
+import com.qunar.qfc2024.oauth2.po.UserPO;
 
 import java.util.List;
 
@@ -10,10 +10,10 @@ public interface UserService {
 
     /**
      * 插入一条信息到数据库中
-     * @param user com.hello.weekly.pojo.User
+     * @param user 用户
      * @return
      *
-     * @author: 漫舞枪神
+     * @author zhangge
      */
     Integer insertUser(UserPO user);
 
@@ -21,10 +21,10 @@ public interface UserService {
     /**
      * 通过用户名进行查询对应的用户
      * @param username String
-     * @return com.hello.weekly.pojo.User
+     * @return 用户信息
      *
-     * @author: 漫舞枪神
-     * @updatedate: 2023/4/18
+     * @author zhangg
+     * @date 2023/4/18
      */
     UserPO findByUsername(String username);
 
@@ -32,8 +32,8 @@ public interface UserService {
      * 返回所有用户
      * @return 用户列表
      *
-     * @author: 漫舞枪神
-     * @date: 2023/4/18
+     * @author zhangg
+     * @date 2023/4/18
      */
     List<UserPO> findAll();
 }

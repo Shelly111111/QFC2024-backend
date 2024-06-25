@@ -1,6 +1,6 @@
-package com.shanke.oauth2.config;
+package com.qunar.qfc2024.oauth2.config;
 
-import com.shanke.oauth2.res.Result;
+import com.qunar.qfc2024.oauth2.res.Result;
 import org.springframework.security.oauth2.provider.endpoint.FrameworkEndpoint;
 import org.springframework.security.oauth2.provider.token.ConsumerTokenServices;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * 删除token服务
  *
- * @author 漫舞枪神
+ * @author zhangge
  * @date 2024/3/18
  */
 @FrameworkEndpoint
@@ -26,8 +26,8 @@ public class RevokeTokenEndpoint {
      * 删除token
      *
      * @param request javax.servlet.http.HttpServletRequest
-     * @return com.hello.oauth.Res.ResponseData
-     * @author 漫舞枪神
+     * @return
+     * @author zhangge
      * @date 2024/3/18
      */
     @RequestMapping(method = RequestMethod.POST, value = "/oauth/revoke")

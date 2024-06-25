@@ -20,6 +20,7 @@
         <module>QFC2024-api</module>
         <module>QFC2024-application</module>
         <module>QFC2024-domain</module>
+        <module>QFC2024-login</module>
     </modules>
     <properties>
 

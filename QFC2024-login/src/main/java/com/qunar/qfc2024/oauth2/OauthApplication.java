@@ -1,4 +1,4 @@
-package com.shanke.oauth2;
+package com.qunar.qfc2024.oauth2;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
@@ -9,7 +9,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
 @SpringBootApplication
-@MapperScan("com.shanke.oauth2.mapper")
+@MapperScan("com.qunar.qfc2024.oauth2.mapper")
 public class OauthApplication {
 
     public static void main(String[] args) {

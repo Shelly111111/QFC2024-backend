@@ -1,6 +1,6 @@
-package com.shanke.oauth2.config;
+package com.qunar.qfc2024.oauth2.config;
 
-import com.shanke.oauth2.service.impl.UserDetailsServiceImpl;
+import com.qunar.qfc2024.oauth2.service.impl.UserDetailsServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -9,7 +9,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
- * @author 漫舞枪神
+ * @author zhangge
  * @date 2024/3/18
  */
 @Configuration
@@ -19,7 +19,7 @@ public class WebConfig implements WebMvcConfigurer {
      * 自行注入一个PasswordEncoder
      * @return org.springframework.security.crypto.password.PasswordEncoder
      *
-     * @author 漫舞枪神
+     * @author zhangge
      * @date 2024/3/18
      */
     @Bean
@@ -34,7 +34,7 @@ public class WebConfig implements WebMvcConfigurer {
      * 另外也可以采用修改configure(AuthenticationManagerBuilder auth)方法并注入authenticationManagerBean的方式
      * @return org.springframework.security.core.userdetails.UserDetailsService
      *
-     * @author 漫舞枪神
+     * @author zhangge
      * @date 2024/3/18
      */
     @Bean
