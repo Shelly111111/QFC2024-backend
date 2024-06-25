@@ -72,7 +72,7 @@ class Qfc2024ApplicationTests {
 
     @Test
     void getCodeLineCountTest() {
-        Long count = codeLineService.getCodeLineCount();
+        Long count = codeLineService.getCodeLineCount(null);
         System.out.println(count);
         //2100
     }
