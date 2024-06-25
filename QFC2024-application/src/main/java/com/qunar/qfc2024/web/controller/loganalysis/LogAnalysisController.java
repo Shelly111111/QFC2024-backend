@@ -3,9 +3,6 @@ package com.qunar.qfc2024.web.controller.loganalysis;
 import com.qunar.qfc2024.api.response.LogAnalysis;
 import com.qunar.qfc2024.api.response.Result;
 import com.qunar.qfc2024.api.service.loganalysis.LogAnalysisService;
-import com.qunar.qfc2024.api.vo.GroupedURLVO;
-import com.qunar.qfc2024.api.vo.InterfaceStatVO;
-import com.qunar.qfc2024.common.enumeration.QueryMethod;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +10,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 
 /**
