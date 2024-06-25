@@ -1,7 +1,7 @@
 package com.qunar.qfc2024.api.service.loganalysis;
 
-import com.qunar.qfc2024.api.dto.GroupedURLDTO;
-import com.qunar.qfc2024.api.dto.InterfaceStatDTO;
+import com.qunar.qfc2024.api.vo.GroupedURLVO;
+import com.qunar.qfc2024.api.vo.InterfaceStatVO;
 import com.qunar.qfc2024.api.response.Result;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -34,7 +34,7 @@ public interface LogAnalysisService {
      * @author zhangge
      * @date 2024/6/24
      */
-    Result<List<InterfaceStatDTO>> getFrequentInterface(String filename, Long limitCount);
+    Result<List<InterfaceStatVO>> getFrequentInterface(String filename, Long limitCount);
 
     /**
      * 获取各个请求方式的请求量
@@ -44,7 +44,7 @@ public interface LogAnalysisService {
      * @author zhangge
      * @date 2024/6/24
      */
-    Result<List<InterfaceStatDTO>> getQueryMethodCount(String filename);
+    Result<List<InterfaceStatVO>> getQueryMethodCount(String filename);
 
     /**
      * URL 格式均为 /AAA/BBB 或者 /AAA/BBB/CCC 格式，按 AAA 分类
@@ -54,7 +54,7 @@ public interface LogAnalysisService {
      * @author zhangge
      * @date 2024/6/24
      */
-    Result<List<GroupedURLDTO>> getGroupedURL(String filename);
+    Result<List<GroupedURLVO>> getGroupedURL(String filename);
 
     /**
      * 保存文件

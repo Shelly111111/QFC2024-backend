@@ -1,7 +1,7 @@
 package com.qunar.qfc2024.web.controller.loganalysis;
 
-import com.qunar.qfc2024.api.dto.GroupedURLDTO;
-import com.qunar.qfc2024.api.dto.InterfaceStatDTO;
+import com.qunar.qfc2024.api.vo.GroupedURLVO;
+import com.qunar.qfc2024.api.vo.InterfaceStatVO;
 import com.qunar.qfc2024.api.response.LogAnalysis;
 import com.qunar.qfc2024.api.response.Result;
 import com.qunar.qfc2024.api.service.loganalysis.LogAnalysisService;
@@ -65,9 +65,9 @@ public class LogAnalysisController {
         }
 
         //获取GET、POST请求量
-        Result<List<InterfaceStatDTO>> methodCount = logAnalysisService.getQueryMethodCount(filename);
+        Result<List<InterfaceStatVO>> methodCount = logAnalysisService.getQueryMethodCount(filename);
         if (Result.SUCCESS_CODE.equals(methodCount.getCode())) {
-            for (InterfaceStatDTO stat : methodCount.getData()) {
+            for (InterfaceStatVO stat : methodCount.getData()) {
                 if (QueryMethod.POST.toString().equals(stat.getLabel())) {
                     analysis.setPostCount(stat.getChildren());
                 } else if (QueryMethod.GET.toString().equals(stat.getLabel())) {
@@ -79,7 +79,7 @@ public class LogAnalysisController {
         }
 
         //获取频繁接口
-        Result<List<InterfaceStatDTO>> frequentInterface = logAnalysisService.getFrequentInterface(filename, 10L);
+        Result<List<InterfaceStatVO>> frequentInterface = logAnalysisService.getFrequentInterface(filename, 10L);
         if (Result.SUCCESS_CODE.equals(frequentInterface.getCode())) {
             analysis.setFrequentInterface(frequentInterface.getData());
         } else {
@@ -87,7 +87,7 @@ public class LogAnalysisController {
         }
 
         //获取URL分组
-        Result<List<GroupedURLDTO>> groupedURL = logAnalysisService.getGroupedURL(filename);
+        Result<List<GroupedURLVO>> groupedURL = logAnalysisService.getGroupedURL(filename);
         if (Result.SUCCESS_CODE.equals(groupedURL.getCode())) {
             analysis.setGroupedURL(groupedURL.getData());
         } else {

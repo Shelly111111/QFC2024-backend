@@ -1,4 +1,4 @@
-package com.qunar.qfc2024.infrastructure.codelines;
+package com.qunar.qfc2024.infrastructure.facade.codelines;
 
 import com.qunar.qfc2024.domain.Facade.codelines.CodeLineFacade;
 import lombok.extern.slf4j.Slf4j;

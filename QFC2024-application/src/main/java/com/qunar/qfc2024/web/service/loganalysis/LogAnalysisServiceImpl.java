@@ -1,7 +1,7 @@
 package com.qunar.qfc2024.web.service.loganalysis;
 
-import com.qunar.qfc2024.api.dto.GroupedURLDTO;
-import com.qunar.qfc2024.api.dto.InterfaceStatDTO;
+import com.qunar.qfc2024.api.vo.GroupedURLVO;
+import com.qunar.qfc2024.api.vo.InterfaceStatVO;
 import com.qunar.qfc2024.api.response.Result;
 import com.qunar.qfc2024.api.service.loganalysis.LogAnalysisService;
 import com.qunar.qfc2024.domain.Facade.loganalysis.AccessFacade;
@@ -42,9 +42,9 @@ public class LogAnalysisServiceImpl implements LogAnalysisService {
     }
 
     @Override
-    public Result<List<InterfaceStatDTO>> getFrequentInterface(String filename, Long limitCount) {
+    public Result<List<InterfaceStatVO>> getFrequentInterface(String filename, Long limitCount) {
 
-        List<InterfaceStatDTO> interfaceStats = logAnalysisMapping.convertInterfaceStatList(accessFacade.getFrequentInterface(filename, limitCount));
+        List<InterfaceStatVO> interfaceStats = logAnalysisMapping.convertInterfaceStatList(accessFacade.getFrequentInterface(filename, limitCount));
         if (Objects.isNull(interfaceStats)) {
             return Result.error("获取频繁接口列表失败！");
         }
@@ -52,9 +52,9 @@ public class LogAnalysisServiceImpl implements LogAnalysisService {
     }
 
     @Override
-    public Result<List<InterfaceStatDTO>> getQueryMethodCount(String filename) {
+    public Result<List<InterfaceStatVO>> getQueryMethodCount(String filename) {
 
-        List<InterfaceStatDTO> interfaceStats = logAnalysisMapping.convertMethodStatList(accessFacade.getQueryMethodCount(filename));
+        List<InterfaceStatVO> interfaceStats = logAnalysisMapping.convertMethodStatList(accessFacade.getQueryMethodCount(filename));
         if (Objects.isNull(interfaceStats)) {
             return Result.error("获取请求方式请求列表失败！");
         }
@@ -62,8 +62,8 @@ public class LogAnalysisServiceImpl implements LogAnalysisService {
     }
 
     @Override
-    public Result<List<GroupedURLDTO>> getGroupedURL(String filename) {
-        List<GroupedURLDTO> groupedURLs = logAnalysisMapping.convertGroupedURLList(accessFacade.getGroupedURL(filename));
+    public Result<List<GroupedURLVO>> getGroupedURL(String filename) {
+        List<GroupedURLVO> groupedURLs = logAnalysisMapping.convertGroupedURLList(accessFacade.getGroupedURL(filename));
         if(Objects.isNull(groupedURLs)){
             return Result.error("获取URL分类列表失败！");
         }

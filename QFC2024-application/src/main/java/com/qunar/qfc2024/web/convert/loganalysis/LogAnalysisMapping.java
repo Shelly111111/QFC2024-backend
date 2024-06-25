@@ -1,7 +1,7 @@
 package com.qunar.qfc2024.web.convert.loganalysis;
 
-import com.qunar.qfc2024.api.dto.GroupedURLDTO;
-import com.qunar.qfc2024.api.dto.InterfaceStatDTO;
+import com.qunar.qfc2024.api.vo.GroupedURLVO;
+import com.qunar.qfc2024.api.vo.InterfaceStatVO;
 import com.qunar.qfc2024.common.enumeration.QueryMethod;
 import com.qunar.qfc2024.domain.bo.GroupedURL;
 import com.qunar.qfc2024.domain.bo.InterfaceStat;
@@ -26,9 +26,9 @@ public interface LogAnalysisMapping {
      * @return 目标
      */
     @Mappings({@Mapping(source = "url", target = "label"), @Mapping(source = "queryCount", target = "children")})
-    InterfaceStatDTO convert(InterfaceStat source);
+    InterfaceStatVO convert(InterfaceStat source);
 
-    List<InterfaceStatDTO> convertInterfaceStatList(List<InterfaceStat> source);
+    List<InterfaceStatVO> convertInterfaceStatList(List<InterfaceStat> source);
 
     /**
      * 转化
@@ -37,12 +37,12 @@ public interface LogAnalysisMapping {
      * @return 目标
      */
     @Mappings({@Mapping(source = "method", target = "label"), @Mapping(source = "queryCount", target = "children")})
-    InterfaceStatDTO convert(MethodStat source);
+    InterfaceStatVO convert(MethodStat source);
 
-    List<InterfaceStatDTO> convertMethodStatList(List<MethodStat> source);
+    List<InterfaceStatVO> convertMethodStatList(List<MethodStat> source);
 
     @Mappings({@Mapping(source = "category", target = "label"), @Mapping(target = "children", expression = "java(source.getUrls().stream().collect(Collectors.joining(\";\")))")})
-    GroupedURLDTO convert(GroupedURL source);
+    GroupedURLVO convert(GroupedURL source);
 
-    List<GroupedURLDTO> convertGroupedURLList(List<GroupedURL> source);
+    List<GroupedURLVO> convertGroupedURLList(List<GroupedURL> source);
 }

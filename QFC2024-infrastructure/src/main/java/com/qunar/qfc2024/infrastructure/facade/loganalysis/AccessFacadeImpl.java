@@ -1,4 +1,4 @@
-package com.qunar.qfc2024.infrastructure.loganalysis;
+package com.qunar.qfc2024.infrastructure.facade.loganalysis;
 
 import com.google.common.base.Splitter;
 import com.google.common.cache.CacheBuilder;

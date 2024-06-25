@@ -1,4 +1,4 @@
-package com.qunar.qfc2024.api.dto;
+package com.qunar.qfc2024.api.vo;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class InterfaceStatDTO {
+public class InterfaceStatVO {
 
     @ApiModelProperty("请求地址/方式")
     private String label;

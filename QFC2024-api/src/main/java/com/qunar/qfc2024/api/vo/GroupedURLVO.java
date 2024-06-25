@@ -1,4 +1,4 @@
-package com.qunar.qfc2024.api.dto;
+package com.qunar.qfc2024.api.vo;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -6,7 +6,6 @@ import lombok.Data;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.constraints.NotNull;
-import java.util.List;
 
 /**
  * URI分组
@@ -16,7 +15,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @Validated
-public class GroupedURLDTO {
+public class GroupedURLVO {
 
     @ApiModelProperty("类别")
     @NotNull(message = "类别不能为空")

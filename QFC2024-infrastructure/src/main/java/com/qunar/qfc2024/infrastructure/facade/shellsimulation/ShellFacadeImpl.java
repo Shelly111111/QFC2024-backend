@@ -1,4 +1,4 @@
-package com.qunar.qfc2024.infrastructure.shellsimulation;
+package com.qunar.qfc2024.infrastructure.facade.shellsimulation;
 
 import com.google.common.base.Splitter;
 import com.qunar.qfc2024.common.entity.ShellCommand;

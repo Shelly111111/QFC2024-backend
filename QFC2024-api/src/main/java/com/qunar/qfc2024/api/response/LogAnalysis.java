@@ -1,7 +1,7 @@
 package com.qunar.qfc2024.api.response;
 
-import com.qunar.qfc2024.api.dto.GroupedURLDTO;
-import com.qunar.qfc2024.api.dto.InterfaceStatDTO;
+import com.qunar.qfc2024.api.vo.GroupedURLVO;
+import com.qunar.qfc2024.api.vo.InterfaceStatVO;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -30,8 +30,8 @@ public class LogAnalysis {
     private String postCount;
 
     @ApiModelProperty("最频繁请求接口")
-    private List<InterfaceStatDTO> frequentInterface;
+    private List<InterfaceStatVO> frequentInterface;
 
     @ApiModelProperty("URL分组")
-    private List<GroupedURLDTO> groupedURL;
+    private List<GroupedURLVO> groupedURL;
 }
