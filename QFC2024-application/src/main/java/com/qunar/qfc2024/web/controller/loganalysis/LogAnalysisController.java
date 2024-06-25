@@ -1,5 +1,6 @@
 package com.qunar.qfc2024.web.controller.loganalysis;
 
+import com.qunar.qfc2024.api.service.common.CommonService;
 import com.qunar.qfc2024.api.vo.GroupedURLVO;
 import com.qunar.qfc2024.api.vo.InterfaceStatVO;
 import com.qunar.qfc2024.api.response.LogAnalysis;
@@ -31,6 +32,9 @@ public class LogAnalysisController {
     @Autowired
     private LogAnalysisService logAnalysisService;
 
+    @Autowired
+    private CommonService commonService;
+
     /**
      * 接收用户上传的文件
      *
@@ -41,7 +45,7 @@ public class LogAnalysisController {
      */
     @PostMapping("/upload")
     public Result getFile(@RequestParam("file") MultipartFile file) {
-        return logAnalysisService.saveFile(file);
+        return commonService.saveFile(file);
     }
 
     /**

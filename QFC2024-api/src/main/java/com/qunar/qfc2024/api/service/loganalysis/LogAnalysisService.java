@@ -56,13 +56,4 @@ public interface LogAnalysisService {
      */
     Result<List<GroupedURLVO>> getGroupedURL(String filename);
 
-    /**
-     * 保存文件
-     *
-     * @param file 文件
-     * @return 是否成功
-     * @author zhangge
-     * @date 2024/6/24
-     */
-    Result saveFile(MultipartFile file);
 }

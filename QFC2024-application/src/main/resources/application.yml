@@ -20,7 +20,6 @@ attachments:
     one:
       folder: Question 1
       file: access.log
-      save: question1
     two:
       folder: Question 2
       file: StringUtils.java
@@ -30,3 +29,4 @@ attachments:
       prop: sdxl_prop.txt
       template: sdxl_template.txt
       output: sdxl.txt
+  save: data

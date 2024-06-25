@@ -3,7 +3,6 @@ package com.qunar.qfc2024.domain.Facade.loganalysis;
 import com.qunar.qfc2024.domain.bo.GroupedURL;
 import com.qunar.qfc2024.domain.bo.InterfaceStat;
 import com.qunar.qfc2024.domain.bo.MethodStat;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -56,13 +55,4 @@ public interface AccessFacade {
      */
     List<GroupedURL> getGroupedURL(String filename);
 
-    /**
-     * 保存文件到本地
-     *
-     * @param file 文件
-     * @return 是否成功
-     * @author zhangge
-     * @date 2024/6/24
-     */
-    boolean saveFile(MultipartFile file);
 }
