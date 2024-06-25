@@ -1,6 +1,7 @@
 package com.qunar.qfc2024.web;
 
 import lombok.extern.slf4j.Slf4j;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -21,6 +22,7 @@ import org.springframework.web.filter.CorsFilter;
         excludeName = {"org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration"}
 )
 @EnableResourceServer
+@MapperScan("com.qunar.qfc2024.infrastructure.mapper")
 public class Qfc2024Application {
 
     public static void main(String[] args) {
