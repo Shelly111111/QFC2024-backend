@@ -34,6 +34,7 @@ public class LogAnalysisServiceImpl implements LogAnalysisService {
     @Override
     public Result<LogAnalysis> analysis(String filename) {
         LogAnalysis analysis = new LogAnalysis();
+        analysis.setFilename(filename);
 
         //统计请求总量
         Integer queryCount = accessFacade.getQueryCount(filename);

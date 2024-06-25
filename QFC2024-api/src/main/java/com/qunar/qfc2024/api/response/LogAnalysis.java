@@ -20,6 +20,9 @@ import java.util.List;
 @NoArgsConstructor
 public class LogAnalysis {
 
+    @ApiModelProperty("文件名")
+    private String filename;
+
     @ApiModelProperty("请求总量")
     private Integer queryCount;
 
