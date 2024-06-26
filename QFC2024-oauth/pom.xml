@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>qfc2024-login</artifactId>
+    <artifactId>qfc2024-oauth</artifactId>
     <packaging>jar</packaging>
 
     <dependencies>
