@@ -13,10 +13,11 @@ public interface CommonFacade {
     /**
      * 保存文件到本地
      *
-     * @param file 文件
+     * @param username 用户名
+     * @param file     文件
      * @return 是否成功
      * @author zhangge
      * @date 2024/6/24
      */
-    boolean saveFile(MultipartFile file);
+    boolean saveFile(String username, MultipartFile file);
 }

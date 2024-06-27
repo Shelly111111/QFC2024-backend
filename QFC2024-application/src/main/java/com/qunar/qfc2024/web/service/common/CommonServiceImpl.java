@@ -1,6 +1,6 @@
 package com.qunar.qfc2024.web.service.common;
 
-import com.qunar.qfc2024.api.response.Result;
+import com.qunar.qfc2024.api.vo.base.Result;
 import com.qunar.qfc2024.api.service.common.CommonService;
 import com.qunar.qfc2024.domain.Facade.common.CommonFacade;
 import lombok.extern.slf4j.Slf4j;
@@ -22,12 +22,12 @@ public class CommonServiceImpl implements CommonService {
     private CommonFacade commonFacade;
 
     @Override
-    public Result saveFile(MultipartFile file) {
+    public Result saveFile(String username, MultipartFile file) {
         if (file.isEmpty()) {
             return Result.error("文件上传失败，请重新上传！");
         }
         //存储文件到本地
-        if (!commonFacade.saveFile(file)) {
+        if (!commonFacade.saveFile(username,file)) {
             return Result.error("文件上传失败，请重新上传！");
         }
 

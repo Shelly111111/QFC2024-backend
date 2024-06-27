@@ -1,4 +1,4 @@
-package com.qunar.qfc2024.api.response;
+package com.qunar.qfc2024.api.vo;
 
 import com.qunar.qfc2024.api.vo.GroupedURLVO;
 import com.qunar.qfc2024.api.vo.InterfaceStatVO;

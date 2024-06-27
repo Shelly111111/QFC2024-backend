@@ -26,7 +26,7 @@ public class MySQLCodeGenerator {
     private final static String OUT_DIR = "/QFC2024-infrastructure/src/main";
 
     public static final String DRIVER_CLASS_NAME = "com.mysql.cj.jdbc.Driver";
-    private static final String URL = "jdbc:mysql://localhost:3306/shake?characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai";
+    private static final String URL = "jdbc:mysql://localhost:3306/qfc2024?characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai";
     private static final String USERNAME = "root";
     public static final String PASSWORD = "root";
 
@@ -98,7 +98,8 @@ public class MySQLCodeGenerator {
                 .setEntityColumnConstant(true)
                 .setEntityLombokModel(true)
                 .setRestControllerStyle(false)
-                .setSuperEntityColumns("id")
+                //不生成id字段
+//                .setSuperEntityColumns("id")
                 .setInclude(scanner("表名，多个英文逗号分割").split(","))
                 .setControllerMappingHyphenStyle(false)
 //                .setEntitySerialVersionUID(false)

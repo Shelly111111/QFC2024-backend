@@ -1,7 +1,7 @@
 package com.qunar.qfc2024.api.service.codelines;
 
-import com.qunar.qfc2024.api.response.CodeLineInfo;
-import com.qunar.qfc2024.api.response.Result;
+import com.qunar.qfc2024.api.vo.CodeLineInfo;
+import com.qunar.qfc2024.api.vo.base.Result;
 
 /**
  * 代码行数统计服务

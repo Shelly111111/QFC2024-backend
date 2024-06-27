@@ -1,7 +1,7 @@
 package com.qunar.qfc2024.web.controller.codelines;
 
-import com.qunar.qfc2024.api.response.CodeLineInfo;
-import com.qunar.qfc2024.api.response.Result;
+import com.qunar.qfc2024.api.vo.CodeLineInfo;
+import com.qunar.qfc2024.api.vo.base.Result;
 import com.qunar.qfc2024.api.service.codelines.CodeLineService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;

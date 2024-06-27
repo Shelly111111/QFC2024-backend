@@ -1,10 +1,10 @@
 package com.qunar.qfc2024.web.service.loganalysis;
 
-import com.qunar.qfc2024.api.response.LogAnalysis;
-import com.qunar.qfc2024.api.response.Result;
+import com.qunar.qfc2024.api.vo.InterfaceStatVO;
+import com.qunar.qfc2024.api.vo.LogAnalysis;
+import com.qunar.qfc2024.api.vo.base.Result;
 import com.qunar.qfc2024.api.service.loganalysis.LogAnalysisService;
 import com.qunar.qfc2024.api.vo.GroupedURLVO;
-import com.qunar.qfc2024.api.vo.InterfaceStatVO;
 import com.qunar.qfc2024.common.enumeration.QueryMethod;
 import com.qunar.qfc2024.domain.Facade.loganalysis.AccessFacade;
 import com.qunar.qfc2024.web.convert.loganalysis.LogAnalysisMapping;

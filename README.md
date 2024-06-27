@@ -13,9 +13,7 @@
 代码见 [loganalysis](https://github.com/Shelly111111/QFC2024-backend/blob/master/QFC2024-domain/src/main/java/com/qunar/qfc2024/domain/Facade/loganalysis/AccessFacade.java) ，相关测试于 [Qfc2024ApplicationTests](https://github.com/Shelly111111/QFC2024-backend/blob/master/QFC2024-application/src/test/java/com/qunar/qfc2024/web/Qfc2024ApplicationTests.java)
 
 ## 二、有效代码行数统计
-从本题对应的附件中找到 StringUtils.java 文件，将其复制到工程的 classpath 下，编程
-统 计 附 件 中 的 StringUtils.java 文件的有效代码行数（一个数字）到一个新 文 件
-validLineCount.txt 中。请注意，
+从本题对应的附件中找到 StringUtils.java 文件，将其复制到工程的 classpath 下，编程统计附件中的 StringUtils.java 文件的有效代码行数（一个数字）到一个新文件 validLineCount.txt 中。请注意，
 1) 有效不包括空行、注释；
 2) 考虑代码里有多行注释的情况；
 3) 不用考虑代码和注释混合在一行的情况。
@@ -23,9 +21,7 @@ validLineCount.txt 中。请注意，
 代码见 [codelines](https://github.com/Shelly111111/QFC2024-backend/blob/master/QFC2024-infrastructure/src/main/java/com/qunar/qfc2024/infrastructure/codelines/CodeLineFacadeImpl.java) ，相关测试于 [Qfc2024ApplicationTests](https://github.com/Shelly111111/QFC2024-backend/blob/master/QFC2024-application/src/test/java/com/qunar/qfc2024/web/Qfc2024ApplicationTests.java)
 
 ## 三、文本解密
-从本题对应的附件中找到 sdxl_prop.txt 和 sdxl_template.txt。根据 sdxl_prop.txt 中内
-容替换掉 sdxl_template.txt 里$function(index)形式文字，将其还原成一本完整小说，写
-到文件 sdxl.txt 中，输出在 classpath 下。
+从本题对应的附件中找到 sdxl_prop.txt 和 sdxl_template.txt。根据 sdxl_prop.txt 中内容替换掉 sdxl_template.txt 里$function(index)形式文字，将其还原成一本完整小说，写到文件 sdxl.txt 中，输出在 classpath 下。
 其中 function 有 4 种类型，替换规则如下：
 1) natureOrder 自然排序，即文本中排列顺序
 2) indexOrder 索引排序，文本中每行第一个数字为索引

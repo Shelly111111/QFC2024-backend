@@ -2,7 +2,7 @@ package com.qunar.qfc2024.web.socketcomm.server;
 
 
 import com.qunar.qfc2024.common.utils.CharacterUtil;
-import com.qunar.qfc2024.api.response.WebInfo;
+import com.qunar.qfc2024.api.vo.WebInfo;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;

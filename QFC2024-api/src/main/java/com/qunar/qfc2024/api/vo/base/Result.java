@@ -1,6 +1,5 @@
-package com.qunar.qfc2024.api.response;
+package com.qunar.qfc2024.api.vo.base;
 
-import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

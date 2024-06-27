@@ -18,8 +18,7 @@ import org.springframework.web.filter.CorsFilter;
 @SpringBootApplication(
         scanBasePackages = {
                 "com.qunar.qfc2024"
-        },
-        excludeName = {"org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration"}
+        }
 )
 @EnableResourceServer
 @MapperScan("com.qunar.qfc2024.infrastructure.mapper")

@@ -1,7 +1,7 @@
 package com.qunar.qfc2024.api.service.loganalysis;
 
-import com.qunar.qfc2024.api.response.LogAnalysis;
-import com.qunar.qfc2024.api.response.Result;
+import com.qunar.qfc2024.api.vo.LogAnalysis;
+import com.qunar.qfc2024.api.vo.base.Result;
 
 /**
  * 日志分析服务

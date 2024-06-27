@@ -1,7 +1,7 @@
 package com.qunar.qfc2024.web.controller.loganalysis;
 
-import com.qunar.qfc2024.api.response.LogAnalysis;
-import com.qunar.qfc2024.api.response.Result;
+import com.qunar.qfc2024.api.vo.LogAnalysis;
+import com.qunar.qfc2024.api.vo.base.Result;
 import com.qunar.qfc2024.api.service.loganalysis.LogAnalysisService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;

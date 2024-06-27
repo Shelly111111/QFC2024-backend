@@ -1,9 +1,11 @@
 package com.qunar.qfc2024.web.controller.common;
 
-import com.qunar.qfc2024.api.response.Result;
+import com.qunar.qfc2024.api.vo.base.Result;
 import com.qunar.qfc2024.api.service.common.CommonService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -34,6 +36,8 @@ public class CommonController {
      */
     @PostMapping("/upload")
     public Result getFile(@RequestParam("file") MultipartFile file) {
-        return commonService.saveFile(file);
+        //获取用户身份信息
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return commonService.saveFile(authentication.getName(), file);
     }
 }
