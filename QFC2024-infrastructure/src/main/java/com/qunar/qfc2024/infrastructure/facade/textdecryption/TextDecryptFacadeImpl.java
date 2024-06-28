@@ -1,5 +1,6 @@
 package com.qunar.qfc2024.infrastructure.facade.textdecryption;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.google.common.base.Splitter;
 import com.google.common.collect.Lists;
@@ -183,12 +184,16 @@ public class TextDecryptFacadeImpl implements TextDecryptFacade {
                 log.error("数据库中不存在该文件！");
                 return null;
             }
-            //逻辑删除除了该版本的文件行内容
-            fileLineRepository.update()
-                    .set(FileLinePO.IS_DELETE, 1)
-                    .eq(FileLinePO.FILE_ID, fileInfo.getId())
-                    .ne(FileLinePO.VERSION, fileInfo.getVersion())
-                    .update();
+            //删除除了该版本的文件行内容
+            QueryWrapper<FileLinePO> wrapper = new QueryWrapper<>();
+            wrapper.eq(FileLinePO.FILE_ID, fileInfo.getId())
+                    .ne(FileLinePO.VERSION, fileInfo.getVersion());
+            fileLineRepository.remove(wrapper);
+//            fileLineRepository.update()
+//                    .set(FileLinePO.IS_DELETE, 1)
+//                    .eq(FileLinePO.FILE_ID, fileInfo.getId())
+//                    .ne(FileLinePO.VERSION, fileInfo.getVersion())
+//                    .update();
 
 
             //先查看数据库中是否存在该内容
