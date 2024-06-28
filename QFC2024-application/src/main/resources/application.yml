@@ -37,4 +37,4 @@ attachments:
       prop: sdxl_prop.txt
       template: sdxl_template.txt
       output: sdxl.txt
-  save: data
+  save: out

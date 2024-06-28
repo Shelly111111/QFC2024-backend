@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.lang.reflect.Method;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
@@ -43,11 +44,12 @@ public class ShellFacadeImpl implements ShellFacade {
                 .stream().map(ShellCommand::new)
                 .collect(Collectors.toList());
 
+        String rootPath = System.getProperty("user.dir");
+
 
         //文件名为第一个命令的最后一个参数
         String filename = cmds.get(0).getArgs().remove(cmds.get(0).getArgs().size() - 1);
-        //获取文件
-        File file = new File(filename);
+        File file = Paths.get(rootPath, filename).toFile();
 
         try {
             ShellResult context = new ShellResult<>();

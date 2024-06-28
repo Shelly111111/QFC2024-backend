@@ -108,7 +108,7 @@ public class CodeLineFacadeImpl implements CodeLineFacade {
             inputStream.close();
 
             //获取输出文件
-            Path outPath = Paths.get(rootPath, "out");
+            Path outPath = Paths.get(rootPath, savePath);
             File folder = outPath.toFile();
             //如果文件夹不存在，则创建
             if (!folder.exists() || !folder.isDirectory()) {
