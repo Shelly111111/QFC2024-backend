@@ -6,11 +6,15 @@ import com.qunar.qfc2024.common.entity.ShellResult;
 import com.qunar.qfc2024.common.utils.Shell;
 import com.qunar.qfc2024.domain.Facade.shellsimulation.ShellFacade;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
@@ -30,8 +34,15 @@ import java.util.stream.Collectors;
 @Slf4j
 public class ShellFacadeImpl implements ShellFacade {
 
+    public static final Integer MAX_SIZE = 10;
+
+    @Value("${attachments.save}")
+    private String savePath;
+
     @Override
-    public void run(String command) {
+    public List<String> run(String command) throws FileNotFoundException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+
+        List<String> list = new ArrayList<>(MAX_SIZE);
 
         //创建Shell命令处理器
         Shell shell = new Shell();
@@ -46,39 +57,42 @@ public class ShellFacadeImpl implements ShellFacade {
 
         String rootPath = System.getProperty("user.dir");
 
-
         //文件名为第一个命令的最后一个参数
         String filename = cmds.get(0).getArgs().remove(cmds.get(0).getArgs().size() - 1);
-        File file = Paths.get(rootPath, filename).toFile();
+        File file = Paths.get(rootPath, savePath, filename).toFile();
 
-        try {
-            ShellResult context = new ShellResult<>();
-            //循环读取每一行，这里不考虑一行数据量过大的超大型文件
-            Scanner scanner = new Scanner(file);
-            while (scanner.hasNextLine()) {
-                context = new ShellResult<>(scanner.nextLine(), false);
-                //根据命令处理改行
-                for (ShellCommand cmd : cmds) {
-                    //根据命令名获取相关方法
-                    Method method = Shell.class.getMethod(cmd.getName(), ShellResult.class, List.class, List.class);
-                    //方法调用
-                    context = (ShellResult) method.invoke(shell, context, cmd.getOpts(), cmd.getArgs());
-                }
-                //判断结果并输出
-                if (Objects.isNull(context)) {
-                    continue;
-                }
-                if (!context.isPrint()) {
-                    System.out.println(context.getData());
-                }
+        ShellResult context = new ShellResult<>();
+        //循环读取每一行，这里不考虑一行数据量过大的超大型文件
+        Scanner scanner = new Scanner(file);
+        while (scanner.hasNextLine()) {
+            context = new ShellResult<>(scanner.nextLine(), false);
+            //根据命令处理改行
+            for (ShellCommand cmd : cmds) {
+                //根据命令名获取相关方法
+                Method method = Shell.class.getMethod(cmd.getName(), ShellResult.class, List.class, List.class);
+                //方法调用
+                context = (ShellResult) method.invoke(shell, context, cmd.getOpts(), cmd.getArgs());
             }
-            if (Objects.nonNull(context) && context.isPrint()) {
+            //判断结果并输出
+            if (Objects.isNull(context)) {
+                continue;
+            }
+            if (!context.isPrint()) {
                 System.out.println(context.getData());
+                if (list.size() < MAX_SIZE) {
+                    list.add(context.getData().toString());
+                }
             }
-            //关闭流
-            scanner.close();
-        } catch (Exception e) {
-            log.error(e.getMessage());
         }
+        if (Objects.nonNull(context) && context.isPrint()) {
+            System.out.println(context.getData());
+            if (list.size() < MAX_SIZE) {
+                list.add(context.getData().toString());
+            }
+        }
+        //关闭流
+        scanner.close();
+
+        return list;
     }
 }

@@ -12,7 +12,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 @SpringBootTest
@@ -84,14 +86,14 @@ class Qfc2024ApplicationTests {
     }
 
     @Test
-    void shellTest() {
-//        String cmd = "cat out\\sdxl.txt";
-//        String cmd = "cat out\\sdxl.txt | grep 我 ";
-        String cmd = "cat out\\sdxl.txt | grep 我 | wc -l";
+    void shellTest() throws FileNotFoundException, InvocationTargetException, NoSuchMethodException, IllegalAccessException {
+//        String cmd = "cat sdxl.txt";
+//        String cmd = "cat sdxl.txt | grep 我 ";
+        String cmd = "cat sdxl.txt | grep 我 | wc -l";
 
-//        String cmd = "grep 我 out\\sdxl.txt";
+//        String cmd = "grep 我 sdxl.txt";
 
-//        String cmd = "wc -l out\\sdxl.txt";
+//        String cmd = "wc -l sdxl.txt";
         shellService.run(cmd);
     }
 }
