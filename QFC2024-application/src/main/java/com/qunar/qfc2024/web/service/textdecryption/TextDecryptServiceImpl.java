@@ -38,7 +38,7 @@ public class TextDecryptServiceImpl implements TextDecryptService {
             }
             return new Result<>(Result.SUCCESS_CODE, page, null);
         } catch (IOException e) {
-            return Result.error("文件获取失败，请重新上传文件！");
+            return Result.error("文件解密失败：" + e.getMessage());
         }
     }
 }

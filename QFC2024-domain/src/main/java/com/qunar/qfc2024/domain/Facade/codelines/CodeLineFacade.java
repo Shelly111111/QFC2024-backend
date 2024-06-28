@@ -1,5 +1,7 @@
 package com.qunar.qfc2024.domain.Facade.codelines;
 
+import java.io.IOException;
+
 /**
  * 有效代码行数统计
  *
@@ -16,5 +18,5 @@ public interface CodeLineFacade {
      * @author zhangge
      * @date 2024/6/11
      */
-    Long getCodeLineCount(String filename);
+    Long getCodeLineCount(String filename) throws IOException;
 }

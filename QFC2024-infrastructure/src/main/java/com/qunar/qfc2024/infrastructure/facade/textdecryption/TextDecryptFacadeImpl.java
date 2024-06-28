@@ -82,46 +82,41 @@ public class TextDecryptFacadeImpl implements TextDecryptFacade {
      * @author zhangge
      * @date 2024/6/12
      */
-    private List<Prop> getProps() {
+    private List<Prop> getProps() throws IOException {
 
         Resource propResource = new ClassPathResource(Paths.get(basePath, folder, prop).toString());
         Integer i = 0;
-        try {
-            List<Prop> props = Lists.newArrayList();
-            //读取prop文件
-            InputStream propInputStream = propResource.getInputStream();
-            Scanner propScanner = new Scanner(propInputStream);
-            while (propScanner.hasNextLine()) {
-                String line = propScanner.nextLine();
-                if (StringUtils.isBlank(line)) {
-                    continue;
-                }
-                List<String> list = Splitter.on('\t').omitEmptyStrings().trimResults().splitToList(line);
-                assert list.size() == 2 : "prop需要索引+内容，索引与内容之间按制表符(tab)分割，且不可存在其他制表符";
-                //存储到props中
-                Prop param = new Prop();
-                param.setNatureOrder(i);
-                param.setIndexOrder(Integer.valueOf(list.get(0)));
-                param.setValue(list.get(1));
-                props.add(param);
-                i++;
+        List<Prop> props = Lists.newArrayList();
+        //读取prop文件
+        InputStream propInputStream = propResource.getInputStream();
+        Scanner propScanner = new Scanner(propInputStream);
+        while (propScanner.hasNextLine()) {
+            String line = propScanner.nextLine();
+            if (StringUtils.isBlank(line)) {
+                continue;
             }
-            //关闭流
-            propScanner.close();
-            propInputStream.close();
-
-            //进行文本排序和文本倒序
-            props = props.parallelStream().sorted(Comparator.comparing(Prop::getValue)).collect(Collectors.toList());
-            for (int j = 0; j < props.size(); j++) {
-                Prop param = props.get(j);
-                param.setCharOrder(j);
-                param.setCharOrderDESC(props.size() - j - 1);
-            }
-            return props;
-        } catch (IOException e) {
-            log.error(e.getMessage());
+            List<String> list = Splitter.on('\t').omitEmptyStrings().trimResults().splitToList(line);
+            assert list.size() == 2 : "prop需要索引+内容，索引与内容之间按制表符(tab)分割，且不可存在其他制表符";
+            //存储到props中
+            Prop param = new Prop();
+            param.setNatureOrder(i);
+            param.setIndexOrder(Integer.valueOf(list.get(0)));
+            param.setValue(list.get(1));
+            props.add(param);
+            i++;
         }
-        return Collections.emptyList();
+        //关闭流
+        propScanner.close();
+        propInputStream.close();
+
+        //进行文本排序和文本倒序
+        props = props.parallelStream().sorted(Comparator.comparing(Prop::getValue)).collect(Collectors.toList());
+        for (int j = 0; j < props.size(); j++) {
+            Prop param = props.get(j);
+            param.setCharOrder(j);
+            param.setCharOrderDESC(props.size() - j - 1);
+        }
+        return props;
     }
 
     /**

@@ -21,7 +21,6 @@ import java.util.Scanner;
  * @date 2024/6/11
  */
 @Component
-@Slf4j
 public class CodeLineFacadeImpl implements CodeLineFacade {
 
     @Value("${attachments.basePath}")
@@ -85,53 +84,48 @@ public class CodeLineFacadeImpl implements CodeLineFacade {
     }
 
     @Override
-    public Long getCodeLineCount(String filename) {
+    public Long getCodeLineCount(String filename) throws IOException {
         String rootPath = System.getProperty("user.dir");
-        Long count = -1L;
-        try {
-            InputStream inputStream;
-            if (StringUtils.isBlank(filename)) {
-                //读取测试文件
-                Resource resource = new ClassPathResource(Paths.get(basePath, folder, file).toString());
-                //获取输入流
-                inputStream = resource.getInputStream();
-            } else {
-                //指定了文件名
-                File file = Paths.get(rootPath, savePath, filename).toFile();
-                inputStream = new FileInputStream(file);
-            }
 
-            //计算有效代码行
-            count = calCodeLine(inputStream);
-
-            //关闭流
-            inputStream.close();
-
-            //获取输出文件
-            Path outPath = Paths.get(rootPath, savePath);
-            File folder = outPath.toFile();
-            //如果文件夹不存在，则创建
-            if (!folder.exists() || !folder.isDirectory()) {
-                Files.createDirectory(outPath);
-            }
-            File file = outPath.resolve(output).toFile();
-            //如果文件不存在，则创建
-            if (!file.exists()) {
-                file.createNewFile();
-            }
-            //获取输出流
-            OutputStream outputStream = new FileOutputStream(file);
-
-            //写入文件
-            outputStream.write(count.toString().getBytes());
-            outputStream.flush();
-
-            //关闭输出流
-            outputStream.close();
-
-        } catch (IOException e) {
-            log.error(e.getMessage());
+        InputStream inputStream;
+        if (StringUtils.isBlank(filename)) {
+            //读取测试文件
+            Resource resource = new ClassPathResource(Paths.get(basePath, folder, file).toString());
+            //获取输入流
+            inputStream = resource.getInputStream();
+        } else {
+            //指定了文件名
+            File file = Paths.get(rootPath, savePath, filename).toFile();
+            inputStream = new FileInputStream(file);
         }
+
+        //计算有效代码行
+        Long count = calCodeLine(inputStream);
+
+        //关闭流
+        inputStream.close();
+
+        //获取输出文件
+        Path outPath = Paths.get(rootPath, savePath);
+        File folder = outPath.toFile();
+        //如果文件夹不存在，则创建
+        if (!folder.exists() || !folder.isDirectory()) {
+            Files.createDirectory(outPath);
+        }
+        File file = outPath.resolve(output).toFile();
+        //如果文件不存在，则创建
+        if (!file.exists()) {
+            file.createNewFile();
+        }
+        //获取输出流
+        OutputStream outputStream = new FileOutputStream(file);
+
+        //写入文件
+        outputStream.write(count.toString().getBytes());
+        outputStream.flush();
+
+        //关闭输出流
+        outputStream.close();
         return count;
     }
 }

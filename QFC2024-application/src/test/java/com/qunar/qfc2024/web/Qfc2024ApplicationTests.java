@@ -45,36 +45,35 @@ class Qfc2024ApplicationTests {
     }
 
     @Test
-    void getQueryCountTest() {
+    void getQueryCountTest() throws IOException {
         Integer count = accessFacade.getQueryCount(null);
         System.out.println(count);
         //132585
     }
 
     @Test
-    void getFrequentInterfaceTest() {
+    void getFrequentInterfaceTest() throws IOException {
         List<InterfaceStat> frequentInterface = accessFacade.getFrequentInterface(null, 10L);
         System.out.println(frequentInterface);
         //[InterfaceStat(method=null, url=/duty/getToDoDutyCount.json, queryCount=23396), InterfaceStat(method=null, url=/twell/public.htm, queryCount=16192), InterfaceStat(method=null, url=/notification/queryMessageByUid.htm, queryCount=16052), InterfaceStat(method=null, url=/twell/querytwellDetailForMobile.htm, queryCount=9584), InterfaceStat(method=null, url=/geo/coord2city.json, queryCount=6085), InterfaceStat(method=null, url=/twell/private.htm, queryCount=5826), InterfaceStat(method=null, url=/user/getResources.json, queryCount=5585), InterfaceStat(method=null, url=/user/getUserInfo.json, queryCount=5300), InterfaceStat(method=null, url=/location/getOneAuthCity.htm, queryCount=5207), InterfaceStat(method=null, url=/user/postDeviceInfo.htm, queryCount=4878)]
-        System.out.println(frequentInterface.size());
     }
 
     @Test
-    void getQueryMethodCountTest() {
+    void getQueryMethodCountTest() throws IOException {
         List<MethodStat> list = accessFacade.getQueryMethodCount(null);
         System.out.println(list);
         //[InterfaceStat(method=POST, url=null, queryCount=16008), InterfaceStat(method=GET, url=null, queryCount=116575)]
     }
 
     @Test
-    void getGroupedURLTest() {
+    void getGroupedURLTest() throws IOException {
         List<GroupedURL> groupedURL = accessFacade.getGroupedURL(null);
         System.out.println(groupedURL);
         //[GroupedURL(category=/visitrecord, urls=[/visitrecord/addVisitRecordNew.htm, /visitrecord/queryVisitRecordForPage.htm, /visitrecord/suggestAccompanyVisitUsers.json, /visitrecord/updateVisitRecordNew.htm]), GroupedURL(category=/org, urls=[/org/queryOrgWithUser.json]), GroupedURL(category=/transferhistory, urls=[/transferhistory/queryTransHis.htm]), GroupedURL(category=/accompanyvisitrecord, urls=[/accompanyvisitrecord/saveAccompanyVisitRecord.json]), GroupedURL(category=/monitor, urls=[/monitor/qmonitor.jsp]), GroupedURL(category=/visitmanage, urls=[/visitmanage/listVisitInfo.htm]), GroupedURL(category=/geo, urls=[/geo/coord2city.json]), GroupedURL(category=/notification, urls=[/notification/queryMessageByUid.htm, /notification/markRead.htm, /notification/queryMessageByUid.json, /notification/queryDetail.htm]), GroupedURL(category=/contact, urls=[/contact/listContactPage.htm, /contact/mylist.htm, /contact/addNew.htm, /contact/updateNew.htm]), GroupedURL(category=/twell, urls=[/twell/querytwellDetailForMobile.htm, /twell/public.htm, /twell/private.htm, /twell/sortingIntwell.htm, /twell/giveUptwells.htm, /twell/allotUserTotwell.json, /twell/queryRoomTypeRoomAmount.json, /twell/addNewtwell1.htm, /twell/editRoomTypeRoomAmount.json, /twell/modifytwellInfo1.htm, /twell/allotUserSuggest.json, /twell/reporttwellInfoError.htm]), GroupedURL(category=/duty, urls=[/duty/getToDoDutyCount.json, /duty/getDutyListNew.json, /duty/detail.json, /duty/processDuty.json, /duty/getDutyListPage.json, /duty/getCategoryTreeFilterEmptyNew.json]), GroupedURL(category=/accompanyvisitmanage, urls=[/accompanyvisitmanage/listAccompanyVisitInfo.json]), GroupedURL(category=/teamchangeprice, urls=[/teamchangeprice/listQueryForMobile.json, /teamchangeprice/editPriceDetailForMobile.json, /teamchangeprice/editPrice.json]), GroupedURL(category=/location, urls=[/location/getOneAuthCity.htm, /location/queryCitiesByParentId.htm]), GroupedURL(category=/tag, urls=[/tag/getSearchTagList.json]), GroupedURL(category=/twelldetail, urls=[/twelldetail/cooperation.htm]), GroupedURL(category=/user, urls=[/user/getResources.json, /user/getUserInfo.json, /user/postDeviceInfo.htm, /user/login.htm, /user/sendVerifyCode.htm, /user/logout.htm]), GroupedURL(category=/_, urls=[/_/jarinfo])]
     }
 
     @Test
-    void getCodeLineCountTest() {
+    void getCodeLineCountTest() throws IOException {
         Long count = codeLineService.getCodeLineCount(null);
         System.out.println(count);
         //2100

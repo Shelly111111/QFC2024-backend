@@ -25,12 +25,14 @@ public class CommonServiceImpl implements CommonService {
 
     @Override
     public Result saveFile(String username, MultipartFile file) {
-        if (file.isEmpty()) {
-            return Result.error("文件上传失败，请重新上传！");
-        }
-        //存储文件到本地
-        if (!commonFacade.saveFile(username, file)) {
-            return Result.error("文件上传失败，请重新上传！");
+        try {
+            //存储文件到本地
+            if (!commonFacade.saveFile(username, file)) {
+                return Result.error("文件上传失败，请重新上传！");
+            }
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            return Result.error("文件上传失败：" + e.getMessage());
         }
 
         return Result.success("文件上传成功！");

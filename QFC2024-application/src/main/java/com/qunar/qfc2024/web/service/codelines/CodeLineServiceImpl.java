@@ -24,13 +24,12 @@ public class CodeLineServiceImpl implements CodeLineService {
     @Override
     public Result<CodeLineInfo> getCodeLineInfo(String filename) {
         CodeLineInfo codeLineInfo = new CodeLineInfo();
-
-        Long count = codeLineFacade.getCodeLineCount(filename);
-        if (count == -1) {
-            return Result.error("统计失败！");
+        try {
+            codeLineInfo.setCodeLine(codeLineFacade.getCodeLineCount(filename));
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            return Result.error("统计失败：" + e.getMessage());
         }
-        codeLineInfo.setCodeLine(count);
-
         return new Result<>(Result.SUCCESS_CODE, codeLineInfo, null);
     }
 }

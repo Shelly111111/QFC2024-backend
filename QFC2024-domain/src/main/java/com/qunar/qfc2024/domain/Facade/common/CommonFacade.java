@@ -2,6 +2,7 @@ package com.qunar.qfc2024.domain.Facade.common;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -21,7 +22,7 @@ public interface CommonFacade {
      * @author zhangge
      * @date 2024/6/24
      */
-    boolean saveFile(String username, MultipartFile file);
+    boolean saveFile(String username, MultipartFile file) throws IOException;
 
     /**
      * 获取文件列表

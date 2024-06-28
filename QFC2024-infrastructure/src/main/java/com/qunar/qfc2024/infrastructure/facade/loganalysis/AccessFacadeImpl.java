@@ -17,10 +17,7 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.nio.file.Paths;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
@@ -70,7 +67,7 @@ public class AccessFacadeImpl implements AccessFacade {
      * @author zhangge
      * @date 2024/6/11
      */
-    private boolean readInterfaceFile(String filename) {
+    private void readInterfaceFile(String filename) throws IOException {
         synchronized (lock) {
             Map<String, InterfaceInfo> map = new HashMap<>(cache.asMap());
             if (map.isEmpty() || (!StringUtils.isBlank(filename) && !currentFile.equals(filename)) || (StringUtils.isBlank(filename) && !currentFile.equals(file))) {
@@ -81,60 +78,51 @@ public class AccessFacadeImpl implements AccessFacade {
                 }
                 cache.invalidateAll();
                 cache.cleanUp();
-                try {
-                    InputStream inputStream;
-                    //未指定文件名
-                    if (StringUtils.isBlank(filename)) {
-                        String filePath = Paths.get(basePath, folder, file).toString();
-                        //读取测试文件
-                        Resource resource = new ClassPathResource(filePath);
-                        //获取流
-                        inputStream = resource.getInputStream();
-                    } else {
-                        //指定了文件名
-                        String rootPath = System.getProperty("user.dir");
-                        File file = Paths.get(rootPath, savePath, filename).toFile();
-                        inputStream = new FileInputStream(file);
-                    }
-
-                    //扫描每行
-                    Scanner scanner = new Scanner(inputStream);
-                    while (scanner.hasNextLine()) {
-                        String line = scanner.nextLine();
-                        if (StringUtils.isBlank(line)) {
-                            continue;
-                        }
-                        //转化为接口信息类并存储到Cache中
-                        InterfaceInfo interfaceInfo = new InterfaceInfo(line);
-                        cache.put(interfaceInfo.getUuid(), interfaceInfo);
-                    }
-
-                    //关闭Scanner
-                    scanner.close();
-                    //关闭流
-                    inputStream.close();
-                } catch (IOException e) {
-                    log.error(e.getMessage());
-                    return false;
+                InputStream inputStream;
+                //未指定文件名
+                if (StringUtils.isBlank(filename)) {
+                    String filePath = Paths.get(basePath, folder, file).toString();
+                    //读取测试文件
+                    Resource resource = new ClassPathResource(filePath);
+                    //获取流
+                    inputStream = resource.getInputStream();
+                } else {
+                    //指定了文件名
+                    String rootPath = System.getProperty("user.dir");
+                    File file = Paths.get(rootPath, savePath, filename).toFile();
+                    inputStream = new FileInputStream(file);
                 }
+
+                //扫描每行
+                Scanner scanner = new Scanner(inputStream);
+                while (scanner.hasNextLine()) {
+                    String line = scanner.nextLine();
+                    if (StringUtils.isBlank(line)) {
+                        continue;
+                    }
+                    //转化为接口信息类并存储到Cache中
+                    InterfaceInfo interfaceInfo = new InterfaceInfo(line);
+                    cache.put(interfaceInfo.getUuid(), interfaceInfo);
+                }
+
+                //关闭Scanner
+                scanner.close();
+                //关闭流
+                inputStream.close();
             }
         }
-        return true;
     }
 
     @Override
-    public Integer getQueryCount(String filename) {
-        if (readInterfaceFile(filename)) {
-            return new HashMap<>(cache.asMap()).size();
-        }
-        return null;
+    public Integer getQueryCount(String filename) throws IOException {
+        readInterfaceFile(filename);
+        return new HashMap<>(cache.asMap()).size();
+
     }
 
     @Override
-    public List<InterfaceStat> getFrequentInterface(String filename, Long limitCount) {
-        if (!readInterfaceFile(filename)) {
-            return null;
-        }
+    public List<InterfaceStat> getFrequentInterface(String filename, Long limitCount) throws IOException {
+        readInterfaceFile(filename);
         //统计各个接口的请求数量
         Map<String, Long> map = new HashMap<>(cache.asMap()).values().stream()
                 .collect(Collectors.groupingBy(InterfaceInfo::getUrl, Collectors.counting()));
@@ -154,10 +142,8 @@ public class AccessFacadeImpl implements AccessFacade {
     }
 
     @Override
-    public List<MethodStat> getQueryMethodCount(String filename) {
-        if (!readInterfaceFile(filename)) {
-            return null;
-        }
+    public List<MethodStat> getQueryMethodCount(String filename) throws IOException {
+        readInterfaceFile(filename);
         //统计GET和POST的请求数量
         Map<QueryMethod, Long> map = new HashMap<>(cache.asMap()).values().stream()
                 //过滤除GET和POST请求外的请求
@@ -175,10 +161,8 @@ public class AccessFacadeImpl implements AccessFacade {
     }
 
     @Override
-    public List<GroupedURL> getGroupedURL(String filename) {
-        if (!readInterfaceFile(filename)) {
-            return null;
-        }
+    public List<GroupedURL> getGroupedURL(String filename) throws IOException {
+        readInterfaceFile(filename);
         Map<String, List<InterfaceInfo>> map = new HashMap<>(cache.asMap())
                 .values()
                 .stream()

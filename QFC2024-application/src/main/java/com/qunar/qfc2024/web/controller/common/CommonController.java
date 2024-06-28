@@ -35,6 +35,9 @@ public class CommonController {
      */
     @PostMapping("/upload")
     public Result saveFile(@RequestParam("file") MultipartFile file) {
+        if (file.isEmpty()) {
+            return Result.error("文件上传失败，请重新上传！");
+        }
         //获取用户身份信息
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return commonService.saveFile(authentication.getName(), file);

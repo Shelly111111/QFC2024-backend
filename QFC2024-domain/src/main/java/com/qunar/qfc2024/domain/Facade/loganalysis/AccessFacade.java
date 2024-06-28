@@ -4,6 +4,7 @@ import com.qunar.qfc2024.domain.bo.GroupedURL;
 import com.qunar.qfc2024.domain.bo.InterfaceStat;
 import com.qunar.qfc2024.domain.bo.MethodStat;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -22,7 +23,7 @@ public interface AccessFacade {
      * @author zhangge
      * @date 2024/6/9
      */
-    Integer getQueryCount(String filename);
+    Integer getQueryCount(String filename) throws IOException;
 
     /**
      * 获取请求最频繁的接口列表
@@ -33,7 +34,7 @@ public interface AccessFacade {
      * @author zhangge
      * @date 2024/6/10
      */
-    List<InterfaceStat> getFrequentInterface(String filename, Long limitCount);
+    List<InterfaceStat> getFrequentInterface(String filename, Long limitCount) throws IOException;
 
     /**
      * 获取各个请求方式的请求量
@@ -43,7 +44,7 @@ public interface AccessFacade {
      * @author zhangge
      * @date 2024/6/10
      */
-    List<MethodStat> getQueryMethodCount(String filename);
+    List<MethodStat> getQueryMethodCount(String filename) throws IOException;
 
     /**
      * URL 格式均为 /AAA/BBB 或者 /AAA/BBB/CCC 格式，按 AAA 分类
@@ -53,6 +54,6 @@ public interface AccessFacade {
      * @author zhangge
      * @date 2024/6/10
      */
-    List<GroupedURL> getGroupedURL(String filename);
+    List<GroupedURL> getGroupedURL(String filename) throws IOException;
 
 }

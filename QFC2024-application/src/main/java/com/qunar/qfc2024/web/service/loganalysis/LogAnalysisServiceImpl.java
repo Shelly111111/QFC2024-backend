@@ -35,41 +35,33 @@ public class LogAnalysisServiceImpl implements LogAnalysisService {
     public Result<LogAnalysis> analysis(String filename) {
         LogAnalysis analysis = new LogAnalysis();
         analysis.setFilename(filename);
+        try {
+            //统计请求总量
+            Integer queryCount = accessFacade.getQueryCount(filename);
+            analysis.setQueryCount(queryCount);
 
-        //统计请求总量
-        Integer queryCount = accessFacade.getQueryCount(filename);
-        if (Objects.isNull(queryCount)) {
-            return Result.error("获取请求总量失败！");
-        }
-        analysis.setQueryCount(queryCount);
-
-        //获取GET、POST请求量
-        List<InterfaceStatVO> interfaceStats = logAnalysisMapping.convertMethodStatList(accessFacade.getQueryMethodCount(filename));
-        if (Objects.isNull(interfaceStats)) {
-            return Result.error("获取请求方式请求列表失败！");
-        }
-        for (InterfaceStatVO stat : interfaceStats) {
-            if (QueryMethod.POST.toString().equals(stat.getLabel())) {
-                analysis.setPostCount(stat.getChildren());
-            } else if (QueryMethod.GET.toString().equals(stat.getLabel())) {
-                analysis.setGetCount(stat.getChildren());
+            //获取GET、POST请求量
+            List<InterfaceStatVO> interfaceStats = logAnalysisMapping.convertMethodStatList(accessFacade.getQueryMethodCount(filename));
+            for (InterfaceStatVO stat : interfaceStats) {
+                if (QueryMethod.POST.toString().equals(stat.getLabel())) {
+                    analysis.setPostCount(stat.getChildren());
+                } else if (QueryMethod.GET.toString().equals(stat.getLabel())) {
+                    analysis.setGetCount(stat.getChildren());
+                }
             }
-        }
 
-        //获取频繁接口
-        interfaceStats = logAnalysisMapping.convertInterfaceStatList(accessFacade.getFrequentInterface(filename, 10L));
-        if (Objects.isNull(interfaceStats)) {
-            return Result.error("获取频繁接口列表失败！");
-        }
-        analysis.setFrequentInterface(interfaceStats);
+            //获取频繁接口
+            interfaceStats = logAnalysisMapping.convertInterfaceStatList(accessFacade.getFrequentInterface(filename, 10L));
+            analysis.setFrequentInterface(interfaceStats);
 
-        //获取URL分组
-        List<GroupedURLVO> groupedURLs = logAnalysisMapping.convertGroupedURLList(accessFacade.getGroupedURL(filename));
-        if (Objects.isNull(groupedURLs)) {
-            return Result.error("获取URL分类列表失败！");
-        }
-        analysis.setGroupedURL(groupedURLs);
+            //获取URL分组
+            List<GroupedURLVO> groupedURLs = logAnalysisMapping.convertGroupedURLList(accessFacade.getGroupedURL(filename));
+            analysis.setGroupedURL(groupedURLs);
 
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            return Result.error("文件分析失败：" + e.getMessage());
+        }
         return new Result<>(Result.SUCCESS_CODE, analysis, null);
     }
 }

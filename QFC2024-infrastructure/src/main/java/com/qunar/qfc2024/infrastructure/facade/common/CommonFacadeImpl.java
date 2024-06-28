@@ -44,68 +44,63 @@ public class CommonFacadeImpl implements CommonFacade {
      * @date 2024/6/24
      */
     @Override
-    public boolean saveFile(String username, MultipartFile file) {
+    @Transactional(rollbackFor = Exception.class)
+    public boolean saveFile(String username, MultipartFile file) throws IOException {
 
         String rootPath = System.getProperty("user.dir");
         //获取输出文件
         String filename = file.getOriginalFilename();
 
-        try {
-            Path outPath = Paths.get(rootPath, savePath);
-            File saveFolder = outPath.toFile();
-            //如果文件夹不存在，则创建
-            if (!saveFolder.exists() || !saveFolder.isDirectory()) {
-                Files.createDirectory(outPath);
+        Path outPath = Paths.get(rootPath, savePath);
+        File saveFolder = outPath.toFile();
+        //如果文件夹不存在，则创建
+        if (!saveFolder.exists() || !saveFolder.isDirectory()) {
+            Files.createDirectory(outPath);
+        }
+
+        File saveFile = outPath.resolve(filename).toFile();
+        //如果文件不存在，则创建
+        if (!saveFile.exists()) {
+            saveFile.createNewFile();
+        }
+
+        FileOutputStream outputStream = new FileOutputStream(saveFile);
+        outputStream.write(file.getBytes());
+        //关闭文件流
+        outputStream.flush();
+        outputStream.close();
+
+        //查询数据库中是否存在该文件
+        FileInfoPO fileInfo = fileInfoRepository.query()
+                .eq(FileInfoPO.FILENAME, filename)
+                .eq(FileInfoPO.IS_DELETE, 0)
+                .one();
+
+        //如果不存在，则存储入数据库
+        if (Objects.isNull(fileInfo)) {
+            fileInfo = new FileInfoPO();
+            fileInfo.setFilename(filename);
+            //写入版本号
+            fileInfo.setVersion(1);
+            fileInfo.setCreateUser(username);
+            fileInfo.setUpdateUser(username);
+
+            if (!fileInfoRepository.save(fileInfo)) {
+                log.error(filename + "存储数据库失败！");
+                return false;
             }
-
-            File saveFile = outPath.resolve(filename).toFile();
-            //如果文件不存在，则创建
-            if (!saveFile.exists()) {
-                saveFile.createNewFile();
-            }
-
-            FileOutputStream outputStream = new FileOutputStream(saveFile);
-            outputStream.write(file.getBytes());
-            //关闭文件流
-            outputStream.flush();
-            outputStream.close();
-
-            //查询数据库中是否存在该文件
-            FileInfoPO fileInfo = fileInfoRepository.query()
+        } else {
+            boolean update = fileInfoRepository.update()
+                    .set(FileInfoPO.UPDATE_USER, username)
+                    //版本+1
+                    .set(FileInfoPO.VERSION, fileInfo.getVersion() + 1)
                     .eq(FileInfoPO.FILENAME, filename)
-                    .eq(FileInfoPO.IS_DELETE, 0)
-                    .one();
-
-            //如果不存在，则存储入数据库
-            if (Objects.isNull(fileInfo)) {
-                fileInfo = new FileInfoPO();
-                fileInfo.setFilename(filename);
-                //写入版本号
-                fileInfo.setVersion(1);
-                fileInfo.setCreateUser(username);
-                fileInfo.setUpdateUser(username);
-
-                if (!fileInfoRepository.save(fileInfo)) {
-                    log.error(filename + "存储数据库失败！");
-                    return false;
-                }
-            } else {
-                boolean update = fileInfoRepository.update()
-                        .set(FileInfoPO.UPDATE_USER, username)
-                        //版本+1
-                        .set(FileInfoPO.VERSION, fileInfo.getVersion() + 1)
-                        .eq(FileInfoPO.FILENAME, filename)
-                        .eq(FileInfoPO.VERSION, fileInfo.getVersion())
-                        .update();
-                if (!update) {
-                    log.error(filename + "更新失败！");
-                    return false;
-                }
+                    .eq(FileInfoPO.VERSION, fileInfo.getVersion())
+                    .update();
+            if (!update) {
+                log.error(filename + "更新失败！");
+                return false;
             }
-
-        } catch (IOException e) {
-            log.error(e.getMessage());
-            return false;
         }
         return true;
     }
