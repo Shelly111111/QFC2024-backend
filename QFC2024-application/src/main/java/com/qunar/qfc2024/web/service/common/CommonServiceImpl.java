@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 /**
  * 通用服务实现类
  *
@@ -27,10 +29,16 @@ public class CommonServiceImpl implements CommonService {
             return Result.error("文件上传失败，请重新上传！");
         }
         //存储文件到本地
-        if (!commonFacade.saveFile(username,file)) {
+        if (!commonFacade.saveFile(username, file)) {
             return Result.error("文件上传失败，请重新上传！");
         }
 
         return Result.success("文件上传成功！");
+    }
+
+    @Override
+    public Result<List<String>> getFileList() {
+        List<String> fileList = commonFacade.getFileList();
+        return new Result<>(Result.SUCCESS_CODE, fileList, null);
     }
 }

@@ -184,11 +184,12 @@ public class TextDecryptFacadeImpl implements TextDecryptFacade {
                 log.error("数据库中不存在该文件！");
                 return null;
             }
-            //删除除了该版本的文件行内容
+            //删除其他版本的文件行内容
             QueryWrapper<FileLinePO> wrapper = new QueryWrapper<>();
             wrapper.eq(FileLinePO.FILE_ID, fileInfo.getId())
                     .ne(FileLinePO.VERSION, fileInfo.getVersion());
             fileLineRepository.remove(wrapper);
+            //这里可以将旧版本的数据放入其他数据库中，以便回溯，同数据库不利于查询
 //            fileLineRepository.update()
 //                    .set(FileLinePO.IS_DELETE, 1)
 //                    .eq(FileLinePO.FILE_ID, fileInfo.getId())
