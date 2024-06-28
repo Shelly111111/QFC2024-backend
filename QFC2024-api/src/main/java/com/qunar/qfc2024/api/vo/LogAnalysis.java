@@ -1,7 +1,5 @@
 package com.qunar.qfc2024.api.vo;
 
-import com.qunar.qfc2024.api.vo.GroupedURLVO;
-import com.qunar.qfc2024.api.vo.InterfaceStatVO;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
