@@ -62,6 +62,12 @@ linux 下有很多对文本进行操作的命令，比如 **cat filename** 可�
 
 代码见 [socketcomm](https://github.com/Shelly111111/QFC2024-backend/blob/master/QFC2024-application/src/main/java/com/qunar/qfc2024/web/socketcomm/) ，服务器端请执行 [server.WebServer](https://github.com/Shelly111111/QFC2024-backend/blob/master/QFC2024-application/src/main/java/com/qunar/qfc2024/web/socketcomm/server/WebServer.java) ，客户端请执行 [client.WebClient](https://github.com/Shelly111111/QFC2024-backend/blob/master/QFC2024-application/src/main/java/com/qunar/qfc2024/web/socketcomm/client/WebClient.java)
 
+## 运行
+
+1. 执行`sql`文件夹下的sql语句，并修改`QFC2024-oauth`下`application-oauth.yml`和`QFC2024-application`下`application.yml`中的数据库相关配置为`{你的配置}`
+2. 运行`OauthApplication`，启动登录服务
+3. 运行`Qfc2024Application`
+
 ## 相关项目
 
 1. [QFC2024](https://github.com/Shelly111111/QFC2024) <br>
