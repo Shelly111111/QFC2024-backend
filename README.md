@@ -74,3 +74,7 @@ linux 下有很多对文本进行操作的命令，比如 **cat filename** 可�
    该程序为作业版本，使用SpringBoot实现“后端开发自学计划”的五个要求。
 2. [QFC2024-web](https://github.com/Shelly111111/qfc2024-web) <br>
    基于react和ant design开发的web前端展示样例。主要提供：登录/注销、日志分析、代码行数统计、文本解密以及Shell模拟的功能。
+
+## 在线demo
+
+http://49.232.6.238:8000/
