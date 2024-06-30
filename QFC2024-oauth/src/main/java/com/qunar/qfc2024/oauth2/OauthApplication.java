@@ -13,10 +13,7 @@ import org.springframework.web.filter.CorsFilter;
 public class OauthApplication {
 
     public static void main(String[] args) {
-        SpringApplication springApplication = new SpringApplication(OauthApplication.class);
-        //或者Edit Configurations中设置Active Profiles为oauth
-        springApplication.setAdditionalProfiles("oauth");
-        springApplication.run(args);
+        SpringApplication.run(OauthApplication.class, args);
     }
 
     @Bean

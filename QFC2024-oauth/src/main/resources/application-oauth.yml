@@ -2,6 +2,8 @@ server:
   port: 8081
 
 spring:
+  application:
+    name: QFC2024-Oauth
   profiles:
     activate:
       on-profile: oauth
